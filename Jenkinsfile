@@ -39,9 +39,11 @@ pipeline{
                 echo '------------>Checkout desde Git Microservicio<------------'
                 //Esta opción se usa para el checkout sencillo de un microservicio
                 checkout scm
+				sh 'chmod +x ./gradle'
+                sh './gradlew clean'
 
                 /*dir("${PROJECT_PATH_BACK}"){
-                    sh 'chmod +x ./gradlew'
+                    sh 'chmod +x ./gradle'
                     sh './gradlew clean'
                 }*/
             }
