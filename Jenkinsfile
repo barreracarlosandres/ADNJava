@@ -43,7 +43,7 @@ pipeline{
 
                 dir("${PROJECT_PATH_BACK}"){
                     sh 'chmod +x ./gradle'
-                    sh './gradlew clean'
+                    sh './gradle clean'
                 }
             }
         }
