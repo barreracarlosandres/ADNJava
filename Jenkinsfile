@@ -41,10 +41,10 @@ pipeline{
                 checkout scm
 				
 
-                dir("${PROJECT_PATH_BACK}"){
-                    sh 'chmod +x ./gradle'
-                    sh './gradle clean'
-                }
+                /*dir("${PROJECT_PATH_BACK}"){
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew clean'
+                }*/
             }
         }
 
@@ -52,8 +52,8 @@ pipeline{
             // El "parallel" es si vamos a correr los test del frontend en paralelo con los test de backend, se configura en otro stage dentro de parallel
             steps{
 				echo "------------>compile & Unit Tests<------------"
-				sh 'chmod +x gradlew'
-				sh './gradlew --b ./build.gradle test'
+				/*sh 'chmod +x gradlew'
+				sh './gradlew --b ./build.gradle test'*/
 			}
 
         }
