@@ -53,10 +53,7 @@ pipeline{
             steps {
                 echo '------------>Checkout desde Git Microservicio<------------'
                 //Esta opciÃ³n se usa para el checkout sencillo de un microservicio
-                gitCheckout(
-                    urlProject:'/presupuesto',
-                    branchProject: '${BRANCH_NAME}', 
-                )
+                checkout scm
 
                 //Esta opciÃ³n se usa cuando el comun estÃ¡ centralizado para varios microservicios
                 /*gitCheckoutWithComun(
