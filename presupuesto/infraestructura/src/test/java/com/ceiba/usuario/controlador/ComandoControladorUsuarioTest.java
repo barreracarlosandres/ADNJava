@@ -46,84 +46,6 @@ class ComandoControladorUsuarioTest {
     }
 
     @Test
-    @DisplayName("No deberia crear un usuario por identificacionUsuario mayor al esperado")
-    void noDeberiaCrearUnUsuarioPorIdentificacionUsuarioMayorAlPermitido() throws Exception{
-        // arrange
-        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
-        usuario.setIdentificacionUsuario(RandomStringUtils.randomAlphabetic(16));
-        // act - assert
-        mocMvc.perform(post("/usuarios")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("No deberia crear un usuario por nombre mayor al esperado")
-    void noDeberiaCrearUnUsuarioNombreMayorAlPermitido() throws Exception{
-        // arrange
-        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
-        usuario.setNombre(RandomStringUtils.randomAlphabetic(101));
-        // act - assert
-        mocMvc.perform(post("/usuarios")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("No deberia crear un usuario por apellido mayor al esperado")
-    void noDeberiaCrearUnUsuarioApellidoMayorAlPermitido() throws Exception{
-        // arrange
-        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
-        usuario.setApellido(RandomStringUtils.randomAlphabetic(101));
-        // act - assert
-        mocMvc.perform(post("/usuarios")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("No deberia crear un usuario por identificacionUsuario no alfanumérico")
-    void noDeberiaCrearUnUsuarioPorIdentificacionUsuarioNoAlfanumerico() throws Exception{
-        // arrange
-        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
-        usuario.setIdentificacionUsuario("**");
-        // act - assert
-        mocMvc.perform(post("/usuarios")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("No deberia crear un usuario por nombre no alfanumérico")
-    void noDeberiaCrearUnUsuarioPorNombreNoAlfanumerico() throws Exception{
-        // arrange
-        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
-        usuario.setNombre("**");
-        // act - assert
-        mocMvc.perform(post("/usuarios")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("No deberia crear un usuario por apellido no alfanumérico")
-    void noDeberiaCrearUnUsuarioPorApellidoNoAlfanumerico() throws Exception{
-        // arrange
-        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
-        usuario.setApellido("**");
-        // act - assert
-        mocMvc.perform(post("/usuarios")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
     @DisplayName("Deberia actualizar un usuario")
     void deberiaActualizarUnUsuario() throws Exception{
         // arrange
@@ -134,19 +56,6 @@ class ComandoControladorUsuarioTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(usuario)))
                 .andExpect(status().isOk());
-    }
-
-    @Test
-    @DisplayName("No debría actualizar un usuario dado que no existe")
-    void noDeberiaActualizarUnUsuarioNoExiste() throws Exception{
-        // arrange
-        String identificacionUsuario = "941231231";
-        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
-        // act - assert
-        mocMvc.perform(put("/usuarios/{identificacionUsuario}",identificacionUsuario)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isNotFound());
     }
 
     @Test

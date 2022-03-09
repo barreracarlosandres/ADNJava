@@ -22,7 +22,7 @@ public class ServicioCrearUsuarioTest {
         UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
                 .conIdentificacionUsuario(RandomStringUtils.randomAlphabetic(16));
         // act - assert
-        BasePrueba.assertThrows(usuarioTestDataBuilder::build, ExcepcionLongitudValor.class, "La clave debe tener una longitud mayor o igual a 4");
+        BasePrueba.assertThrows(usuarioTestDataBuilder::build, ExcepcionLongitudValor.class, "identificacionUsuario no debe ser mayor a 15");
     }
 
     @Test
