@@ -1,8 +1,8 @@
-package com.ceiba.usuario.servicio;
+package com.ceiba.usuario.puerto.dao.servicio;
 
-import com.ceiba.usuario.modelo.entidad.Usuario;
-import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.usuario.puerto.dao.modelo.entidad.Usuario;
+import com.ceiba.usuario.puerto.dao.puerto.repositorio.RepositorioUsuario;
 
 
 public class ServicioCrearUsuario {
@@ -16,7 +16,6 @@ public class ServicioCrearUsuario {
     }
 
     public Long ejecutar(Usuario usuario) {
-        usuario.getFechaCreacion();
         validarExistenciaPrevia(usuario);
         return this.repositorioUsuario.crear(usuario);
     }

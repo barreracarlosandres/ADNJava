@@ -49,8 +49,10 @@ class ComandoControladorUsuarioTest {
     void deberiaCrearUnUsuario() throws Exception{
         // arrange
         ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
+        System.out.println("*****");
+        System.out.println(usuario.getFecha());
         // act - assert
-        mocMvc.perform(post("/gasto")
+        mocMvc.perform(post("/usuarios")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(usuario)))
                 .andExpect(status().isOk())
@@ -64,7 +66,7 @@ class ComandoControladorUsuarioTest {
         Long id = 1L;
         ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
         // act - assert
-        mocMvc.perform(put("/gasto/{id}",id)
+        mocMvc.perform(put("/usuarios/{id}",id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(usuario)))
                 .andExpect(status().isOk());
@@ -76,12 +78,12 @@ class ComandoControladorUsuarioTest {
         // arrange
         Long id = 1L;
         // act - assert
-        mocMvc.perform(delete("/gasto/{id}",id)
+        mocMvc.perform(delete("/usuarios/{id}",id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mocMvc.perform(get("/gasto")
+        mocMvc.perform(get("/usuarios")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));

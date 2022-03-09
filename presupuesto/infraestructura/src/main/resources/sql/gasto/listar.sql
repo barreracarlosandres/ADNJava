@@ -1,0 +1,1 @@
+select identificacionUsuario,valorGasto,fecha_gasto from gasto

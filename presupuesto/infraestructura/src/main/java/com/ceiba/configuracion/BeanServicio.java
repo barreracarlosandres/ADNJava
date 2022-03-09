@@ -1,5 +1,9 @@
 package com.ceiba.configuracion;
 
+import com.ceiba.gasto.puerto.repositorio.RepositorioGasto;
+import com.ceiba.gasto.servicio.ServicioActualizarGasto;
+import com.ceiba.gasto.servicio.ServicioCrearGasto;
+import com.ceiba.gasto.servicio.ServicioEliminarGasto;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import com.ceiba.usuario.servicio.ServicioActualizarUsuario;
 import com.ceiba.usuario.servicio.ServicioCrearUsuario;
@@ -23,6 +27,21 @@ public class BeanServicio {
     @Bean
     public ServicioActualizarUsuario servicioActualizarUsuario(RepositorioUsuario repositorioUsuario) {
         return new ServicioActualizarUsuario(repositorioUsuario);
+    }
+
+    @Bean
+    public ServicioCrearGasto servicioCrearGasto(RepositorioGasto repositorioGasto) {
+        return new ServicioCrearGasto(repositorioGasto);
+    }
+
+    @Bean
+    public ServicioEliminarGasto servicioEliminarGasto(RepositorioGasto repositorioGasto) {
+        return new ServicioEliminarGasto(repositorioGasto);
+    }
+
+    @Bean
+    public ServicioActualizarGasto servicioActualizarGasto(RepositorioGasto repositorioGasto) {
+        return new ServicioActualizarGasto(repositorioGasto);
     }
 	
 

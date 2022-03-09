@@ -32,7 +32,7 @@ class ConsultaControladorUsuarioTest {
     void deberiaListarUsuarios() throws Exception {
         // arrange
         // act - assert
-        mocMvc.perform(get("/gasto")
+        mocMvc.perform(get("/usuarios")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))

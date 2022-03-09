@@ -13,7 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/gasto")
+@RequestMapping("/usuarios")
 @Api(tags={"Controlador consulta usuario"})
 public class ConsultaControladorUsuario {
 
