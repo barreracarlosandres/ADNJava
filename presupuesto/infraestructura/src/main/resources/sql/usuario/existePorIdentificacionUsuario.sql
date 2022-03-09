@@ -1,0 +1,1 @@
+select count(1) from usuario where identificacion_usuario = :identificacionUsuario
