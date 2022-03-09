@@ -33,21 +33,6 @@ pipeline{
             password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a passwor')
      }*/
 
-    /*stages{
-        stage('Checkout') {
-            steps {
-                echo '------------>Checkout desde Git Microservicio<------------'
-                //Esta opción se usa para el checkout sencillo de un microservicio
-                //checkout scm
-				
-
-                dir("${PROJECT_PATH_BACK}"){
-                    sh 'chmod +x ./gradlew'
-                    sh './gradlew clean'
-                }
-            }
-        }*/
-		
 		stages{
         stage('Checkout') {
             steps {
@@ -82,7 +67,7 @@ pipeline{
                     }
                     post{
                         always {
-                            junit '**/build/test-results/test/*.xml' //ConfiguraciÃ³n de los reportes de JUnit
+                            junit '**/build/test-results/test/*.xml' //Configuración de los reportes de JUnit
                         }
                     }
                 }
@@ -125,7 +110,7 @@ pipeline{
     post {
         failure {
             mail(
-                to: 'carlos.barrera@javerianacali.edu.co',
+                to: 'carlos.barrera@ceiba.com.co',
                 body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
                 subject: "ERROR CI: ${env.JOB_NAME}"
             )
