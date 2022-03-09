@@ -106,10 +106,11 @@ pipeline{
                 stage('construcción Backend'){
                     steps{
                         echo "------------>Compilación backend<------------"
-                        dir("${PROJECT_PATH_BACK}"){
+						sh './gradlew --b ./build.gradle build -x test'
+                        /*dir("${PROJECT_PATH_BACK}"){
                             //sh './gradlew build -x test'
 							sh './gradlew --b ./build.gradle build -x test'
-                        }
+                        }*/
                     }
                 }
             }
