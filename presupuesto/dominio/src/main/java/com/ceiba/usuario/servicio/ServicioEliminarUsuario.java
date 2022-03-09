@@ -11,6 +11,6 @@ public class ServicioEliminarUsuario {
     }
 
     public void ejecutar(Long id) {
-        this.repositorioUsuario.eliminar(id);
+        this.repositorioUsuario.eliminarPorId(id);
     }
 }

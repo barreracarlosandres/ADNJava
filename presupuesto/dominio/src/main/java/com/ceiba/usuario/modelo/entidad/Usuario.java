@@ -3,36 +3,50 @@ package com.ceiba.usuario.modelo.entidad;
 
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
-import static com.ceiba.dominio.ValidadorArgumento.validarLongitud;
-import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
+import static com.ceiba.dominio.ValidadorArgumento.*;
 
 @Getter
 public class Usuario {
 
-    private static final String SE_DEBE_INGRESAR_LA_FECHA_CREACION = "Se debe ingresar la fecha de creación";
-    private static final String LA_CLAVE_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "La clave debe tener una longitud mayor o igual a %s";
-    private static final String SE_DEBE_INGRESAR_LA_CLAVE = "Se debe ingresar la clave";
-    private static final String SE_DEBE_INGRESAR_EL_NOMBRE_DE_USUARIO = "Se debe ingresar el nombre de usuario";
+    private static final String SE_DEBE_INGRESAR_NOMBRE_DE_USUARIO = "Debe ingresar nombre";
+    private static final String SE_DEBE_INGRESAR_EL_APELLIDO_DE_USUARIO = "Debe ingresar apellido";
+    private static final String SE_DEBE_INGRESAR_LA_IDENTIFICACION_USUARIO = "Debe ingresar identificacionUsuario";
 
-    private static final int LONGITUD_MINIMA_CLAVE = 4;
+    private static final int LONGITUD_MAXIMA_NOMBRE = 100;
+    private static final int LONGITUD_MAXIMA_APELLIDO = 100;
+    private static final int LONGITUD_MAXIMA_IDENTIFICACION_USUARIO = 15;
+
+    private static final String EL_NOMBRE_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "nombre no debe ser mayor a 100";
+    private static final String EL_APELLIDO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "apellido no debe ser mayor a 100";
+    private static final String LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "identificacionUsuario no debe ser mayor a 15";
+
+    private static final String EL_FORMATO_NOMBRE_USUARIO = "El nombre debe ser alfanumérico";
+    private static final String EL_FORMATO_APELLIDO_USUARIO = "El apellido debe ser alfanumérico";
+    private static final String EL_FORMATO_IDENTIFICACION_USUARIO = "La identificacionUsuario debe ser alfanumérico";
+    private static final String FORTAMO_ALFANUMERICO = "[A-Za-z0-9]+";
 
     private Long id;
     private String nombre;
-    private String clave;
-    private LocalDateTime fechaCreacion;
+    private String apellido;
+    private String identificacionUsuario;
 
-    public Usuario(Long id,String nombre, String clave,LocalDateTime fechaCreacion) {
-        validarObligatorio(nombre, SE_DEBE_INGRESAR_EL_NOMBRE_DE_USUARIO);
-        validarObligatorio(clave, SE_DEBE_INGRESAR_LA_CLAVE);
-        validarLongitud(clave, LONGITUD_MINIMA_CLAVE, String.format(LA_CLAVE_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A,LONGITUD_MINIMA_CLAVE));
-        validarObligatorio(fechaCreacion, SE_DEBE_INGRESAR_LA_FECHA_CREACION);
+    public Usuario(Long id, String nombre, String apellido, String identificacionUsuario) {
+        validarObligatorio(nombre, SE_DEBE_INGRESAR_NOMBRE_DE_USUARIO);
+        validarObligatorio(apellido, SE_DEBE_INGRESAR_EL_APELLIDO_DE_USUARIO);
+        validarObligatorio(identificacionUsuario, SE_DEBE_INGRESAR_LA_IDENTIFICACION_USUARIO);
+
+        validarLongitudMaxima(nombre,LONGITUD_MAXIMA_NOMBRE, EL_NOMBRE_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
+        validarLongitudMaxima(apellido,LONGITUD_MAXIMA_APELLIDO, EL_APELLIDO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
+        validarLongitudMaxima(identificacionUsuario,LONGITUD_MAXIMA_IDENTIFICACION_USUARIO, LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
+
+        validarRegex(nombre,FORTAMO_ALFANUMERICO, EL_FORMATO_NOMBRE_USUARIO);
+        validarRegex(apellido,FORTAMO_ALFANUMERICO,EL_FORMATO_APELLIDO_USUARIO );
+        validarRegex(identificacionUsuario,FORTAMO_ALFANUMERICO,EL_FORMATO_IDENTIFICACION_USUARIO );
 
         this.id = id;
         this.nombre = nombre;
-        this.clave = clave;
-        this.fechaCreacion = fechaCreacion;
+        this.apellido = apellido;
+        this.identificacionUsuario = identificacionUsuario;
     }
 
 }

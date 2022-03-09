@@ -30,6 +30,7 @@ dependencies {
 	testImplementation project.ext.mockitojupiter
 	testImplementation project(':comun:comun-test')
 
+	implementation 'org.apache.commons:commons-lang3:3.7'
 	implementation project(':comun:comun-dominio')
 
 	compileOnly project.ext.lombok

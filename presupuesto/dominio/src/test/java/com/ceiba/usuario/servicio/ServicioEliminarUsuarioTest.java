@@ -15,7 +15,7 @@ public class ServicioEliminarUsuarioTest {
 
         servicioEliminarUsuario.ejecutar(1l);
 
-        Mockito.verify(repositorioUsuario, Mockito.times(1)).eliminar(1l);
+        Mockito.verify(repositorioUsuario, Mockito.times(1)).eliminarPorId(1l);
 
     }
 

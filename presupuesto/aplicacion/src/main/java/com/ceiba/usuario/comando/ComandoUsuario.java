@@ -15,6 +15,6 @@ public class ComandoUsuario{
 
     private Long id;
     private String nombre;
-    private String clave;
-    private LocalDateTime fecha;
+    private String apellido;
+    private String identificacionUsuario;
 }

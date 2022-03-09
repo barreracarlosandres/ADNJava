@@ -18,14 +18,11 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
     @SqlStatement(namespace="usuario", value="actualizar")
     private static String sqlActualizar;
 
-    @SqlStatement(namespace="usuario", value="eliminar")
-    private static String sqlEliminar;
+    @SqlStatement(namespace="usuario", value="eliminarPorId")
+    private static String sqlEliminarPorId;
 
-    @SqlStatement(namespace="usuario", value="existe")
-    private static String sqlExiste;
-
-    @SqlStatement(namespace="usuario", value="existePorId")
-    private static String sqlExistePorId;
+    @SqlStatement(namespace="usuario", value="existePorIdentificacionUsuario")
+    private static String sqlExistePorIdentificacionUsuario;
 
     public RepositorioUsuarioMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -37,19 +34,19 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
     }
 
     @Override
-    public void eliminar(Long id) {
+    public void eliminarPorId(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
 
-        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminarPorId, paramSource);
     }
 
     @Override
-    public boolean existe(String nombre) {
+    public boolean existePorIdentificacionUsuario(String identificacionUsuario) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("nombre", nombre);
+        paramSource.addValue("identificacionUsuario", identificacionUsuario);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePorIdentificacionUsuario,paramSource, Boolean.class);
     }
 
     @Override
@@ -57,11 +54,5 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
         this.customNamedParameterJdbcTemplate.actualizar(usuario, sqlActualizar);
     }
 
-    @Override
-    public boolean existePorId(Long id) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", id);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePorId,paramSource, Boolean.class);
-    }
 }

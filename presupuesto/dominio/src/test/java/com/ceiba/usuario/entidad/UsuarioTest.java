@@ -2,13 +2,13 @@ package com.ceiba.usuario.entidad;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.servicio.testdatabuilder.UsuarioTestDataBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,17 +18,18 @@ public class UsuarioTest {
     @DisplayName("Deberia crear correctamente el usuario")
     void deberiaCrearCorrectamenteElUsusuario() {
         // arrange
-        LocalDateTime fechaCreacion = LocalDateTime.now();
+        //LocalDateTime fechaCreacion = LocalDateTime.now();
         //act
-        Usuario usuario = new UsuarioTestDataBuilder().conFechaCreacion(fechaCreacion).conId(1L).build();
+        Usuario usuario = new UsuarioTestDataBuilder().conId(1L).build();
         //assert
         assertEquals(1, usuario.getId());
-        assertEquals("1234", usuario.getNombre());
-        assertEquals("1234", usuario.getClave());
-        assertEquals(fechaCreacion, usuario.getFechaCreacion());
+        assertEquals("nombreTest", usuario.getNombre());
+        assertEquals("apellidoTest", usuario.getApellido());
+        assertEquals("identTest", usuario.getIdentificacionUsuario());
     }
 
     @Test
+    @DisplayName("No debería ingresar sin nombre")
     void deberiaFallarSinNombreDeUsuario() {
 
         //Arrange
@@ -37,34 +38,123 @@ public class UsuarioTest {
         BasePrueba.assertThrows(() -> {
                     usuarioTestDataBuilder.build();
                 },
-                ExcepcionValorObligatorio.class, "Se debe ingresar el nombre de usuario");
+                ExcepcionValorObligatorio.class, "Debe ingresar nombre");
     }
 
     @Test
-    void deberiaFallarSinClave() {
+    @DisplayName("No debería ingresar sin apellido")
+    void deberiaFallarSinApellido() {
 
         //Arrange
-        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conClave(null).conId(1L);
+        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conApellido(null).conId(1L);
         //act-assert
         BasePrueba.assertThrows(() -> {
                     usuarioTestDataBuilder.build();
                 },
-                ExcepcionValorObligatorio.class, "Se debe ingresar la clave");
+                ExcepcionValorObligatorio.class, "Debe ingresar apellido");
     }
 
     @Test
-    void deberiaFallarSinTamanioClave() {
+    @DisplayName("debe fallar sin identificacionUsuario")
+    void deberiaFallarSinIdentificacionUsuario() {
 
         //Arrange
-        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conClave("123").conId(1L);
+        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conIdentificacionUsuario(null).conId(1L);
         //act-assert
         BasePrueba.assertThrows(() -> {
                     usuarioTestDataBuilder.build();
                 },
-                ExcepcionLongitudValor.class, "La clave debe tener una longitud mayor o igual a 4");
+                ExcepcionValorObligatorio.class, "Debe ingresar identificacionUsuario");
     }
 
     @Test
+    @DisplayName("debe fallar sin tamaño nombre")
+    void deberiaFallarSinTamanioNombre() {
+
+        //Arrange
+        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
+                .conNombre(RandomStringUtils.randomAlphabetic(101))
+                .conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    usuarioTestDataBuilder.build();
+                },
+                ExcepcionLongitudValor.class, "nombre no debe ser mayor a 100");
+    }
+
+    @Test
+    @DisplayName("debe fallar sin tamaño apellido")
+    void deberiaFallarSinTamanioApellido() {
+
+        //Arrange
+        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
+                .conApellido(RandomStringUtils.randomAlphabetic(101))
+                .conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    usuarioTestDataBuilder.build();
+                },
+                ExcepcionLongitudValor.class, "apellido no debe ser mayor a 100");
+    }
+
+    @Test
+    @DisplayName("debe fallar sin tamaño identificacionUsuario")
+    void deberiaFallarSinTamanioIdentificacionUsuario() {
+
+        //Arrange
+        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
+                .conIdentificacionUsuario(RandomStringUtils.randomAlphabetic(101))
+                .conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    usuarioTestDataBuilder.build();
+                },
+                ExcepcionLongitudValor.class, "identificacionUsuario no debe ser mayor a 15");
+    }
+
+    @Test
+    @DisplayName("debe fallar con nombre no alfanumérico")
+    void deberiaFallarNombreNoAlfanumerico() {
+
+        //Arrange
+        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
+                .conNombre("**").conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    usuarioTestDataBuilder.build();
+                },
+                ExcepcionValorInvalido.class, "El nombre debe ser alfanumérico");
+    }
+
+    @Test
+    @DisplayName("debe fallar con apellido no alfanumérico")
+    void deberiaFallarApellidoNoAlfanumerico() {
+
+        //Arrange
+        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
+                .conApellido("**").conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    usuarioTestDataBuilder.build();
+                },
+                ExcepcionValorInvalido.class, "El apellido debe ser alfanumérico");
+    }
+
+    @Test
+    @DisplayName("debe fallar con identificacionUsuario no alfanumérico")
+    void deberiaFallarIdentificacionUsuarioNoAlfanumerico() {
+
+        //Arrange
+        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
+                .conIdentificacionUsuario("**").conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    usuarioTestDataBuilder.build();
+                },
+                ExcepcionValorInvalido.class, "La identificacionUsuario debe ser alfanumérico");
+    }
+
+    /*@Test
     void deberiaFallarSinFechaCreacion() {
 
         //Arrange
@@ -74,7 +164,7 @@ public class UsuarioTest {
                     usuarioTestDataBuilder.build();
                 },
                 ExcepcionValorObligatorio.class, "Se debe ingresar la fecha de creación");
-    }
+    }*/
 
 
 }

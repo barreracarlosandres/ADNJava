@@ -2,6 +2,7 @@ package com.ceiba.usuario.servicio;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import com.ceiba.usuario.servicio.testdatabuilder.UsuarioTestDataBuilder;
@@ -15,12 +16,12 @@ public class ServicioActualizarUsuarioTest {
     @DisplayName("Deberia validar la existencia previa del usuario")
     void deberiaValidarLaExistenciaPreviaDelUsuario() {
         // arrange
-        Usuario usuario = new UsuarioTestDataBuilder().conId(1L).build();
+        Usuario usuario = new UsuarioTestDataBuilder().conIdentificacionUsuario("94").build();
         RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
-        Mockito.when(repositorioUsuario.existePorId(Mockito.anyLong())).thenReturn(false);
+        Mockito.when(repositorioUsuario.existePorIdentificacionUsuario(Mockito.anyString())).thenReturn(false);
         ServicioActualizarUsuario servicioActualizarUsuario = new ServicioActualizarUsuario(repositorioUsuario);
         // act - assert
-        BasePrueba.assertThrows(() -> servicioActualizarUsuario.ejecutar(usuario), ExcepcionDuplicidad.class,"El no usuario existe en el sistema");
+        BasePrueba.assertThrows(() -> servicioActualizarUsuario.ejecutar(usuario), ExcepcionSinDatos.class,"El no usuario existe en el sistema");
     }
 
     @Test
@@ -29,7 +30,7 @@ public class ServicioActualizarUsuarioTest {
         // arrange
         Usuario usuario = new UsuarioTestDataBuilder().conId(1L).build();
         RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
-        Mockito.when(repositorioUsuario.existePorId(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(repositorioUsuario.existePorIdentificacionUsuario(Mockito.anyString())).thenReturn(true);
         ServicioActualizarUsuario servicioActualizarUsuario = new ServicioActualizarUsuario(repositorioUsuario);
         // act
         servicioActualizarUsuario.ejecutar(usuario);

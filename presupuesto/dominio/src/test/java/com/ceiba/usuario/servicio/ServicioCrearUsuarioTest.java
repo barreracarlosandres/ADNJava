@@ -6,6 +6,7 @@ import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import com.ceiba.usuario.servicio.testdatabuilder.UsuarioTestDataBuilder;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -15,10 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ServicioCrearUsuarioTest {
 
     @Test
-    @DisplayName("Deberia lanzar una exepecion cuando la longitud de la clave sea menor a 4")
-    void deberiaLanzarUnaExepcionCuandoLaLongitudDeLaClaveSeaMenorACuatro() {
+    @DisplayName("Deberia lanzar una exepecion cuando indentificacionUsuario mayor a 15")
+    void deberiaLanzarUnaExepcionCuandoLaLongitudDeLaIdentificacionUsuarioSeaMayoA15() {
         // arrange
-        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conClave("124");
+        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
+                .conIdentificacionUsuario(RandomStringUtils.randomAlphabetic(16));
         // act - assert
         BasePrueba.assertThrows(usuarioTestDataBuilder::build, ExcepcionLongitudValor.class, "La clave debe tener una longitud mayor o igual a 4");
     }
@@ -29,7 +31,7 @@ public class ServicioCrearUsuarioTest {
         // arrange
         Usuario usuario = new UsuarioTestDataBuilder().build();
         RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
-        Mockito.when(repositorioUsuario.existe(Mockito.anyString())).thenReturn(true);
+        Mockito.when(repositorioUsuario.existePorIdentificacionUsuario(Mockito.anyString())).thenReturn(true);
         ServicioCrearUsuario servicioCrearUsuario = new ServicioCrearUsuario(repositorioUsuario);
         // act - assert
         BasePrueba.assertThrows(() -> servicioCrearUsuario.ejecutar(usuario), ExcepcionDuplicidad.class,"El usuario ya existe en el sistema");
@@ -41,7 +43,7 @@ public class ServicioCrearUsuarioTest {
         // arrange
         Usuario usuario = new UsuarioTestDataBuilder().build();
         RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
-        Mockito.when(repositorioUsuario.existe(Mockito.anyString())).thenReturn(false);
+        Mockito.when(repositorioUsuario.existePorIdentificacionUsuario(Mockito.anyString())).thenReturn(false);
         Mockito.when(repositorioUsuario.crear(usuario)).thenReturn(10L);
         ServicioCrearUsuario servicioCrearUsuario = new ServicioCrearUsuario(repositorioUsuario);
         // act
