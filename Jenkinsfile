@@ -33,30 +33,75 @@ pipeline{
             password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a passwor')
      }*/
 
-    stages{
+    /*stages{
         stage('Checkout') {
             steps {
                 echo '------------>Checkout desde Git Microservicio<------------'
                 //Esta opción se usa para el checkout sencillo de un microservicio
-                checkout scm
+                //checkout scm
 				
 
-                /*dir("${PROJECT_PATH_BACK}"){
+                dir("${PROJECT_PATH_BACK}"){
                     sh 'chmod +x ./gradlew'
                     sh './gradlew clean'
-                }*/
+                }
+            }
+        }*/
+		
+		stages{
+        stage('Checkout') {
+            steps {
+                echo '------------>Checkout desde Git Microservicio<------------'
+                //Esta opciÃ³n se usa para el checkout sencillo de un microservicio
+                gitCheckout(
+                    urlProject:'/presupuesto',
+                    branchProject: '${BRANCH_NAME}', 
+                )
+
+                //Esta opciÃ³n se usa cuando el comun estÃ¡ centralizado para varios microservicios
+                /*gitCheckoutWithComun(
+                    urlProject:'git@git.ceiba.com.co:ceiba_legos/revision-blocks.git',
+                    branchProject: '${BRANCH_NAME}',
+                    urlComun: 'git@git.ceiba.com.co:ceiba_legos/comun.git'
+                )*/
+
+                dir("${PROJECT_PATH_BACK}"){
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew clean'
+                }
             }
         }
 
+
         stage('Compilacion y Test Unitarios'){
             // El "parallel" es si vamos a correr los test del frontend en paralelo con los test de backend, se configura en otro stage dentro de parallel
-            steps{
-				echo "------------>compile & Unit Tests<------------"
-				sh 'chmod +x gradlew'
-				sh './gradlew --b ./build.gradle test'
-			}
-
+            parallel {
+                stage('Test- Backend'){
+                    steps {
+                        echo '------------>Test Backend<------------'
+                        dir("${PROJECT_PATH_BACK}"){
+                            sh './gradlew --stacktrace test'
+                        }
+                    }
+                    post{
+                        always {
+                            junit '**/build/test-results/test/*.xml' //ConfiguraciÃ³n de los reportes de JUnit
+                        }
+                    }
+                }
+                /*
+                stage('Test- Frontend'){
+                    steps {
+                        echo '------------>Test Frontend<------------'
+                        dir("${PROJECT_PATH_FRONT}"){
+                            // comando ejecucion test
+                        }
+                    }
+                }
+                */
+            }
         }
+
 		
 		stage('Static Code Analysis') {
 			steps{
