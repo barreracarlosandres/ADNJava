@@ -90,9 +90,9 @@ pipeline{
 		
 		stage('Static Code Analysis') {
 			steps{
-				sonarqubeMasQualityGates(sonarKey:'com.ceiba.core.presupuesto', 
+				/*sonarqubeMasQualityGates(sonarKey:'com.ceiba.core.presupuesto', 
 				sonarName:'co.com.ceiba.presupuesto:presupuesto', 
-				sonarPathProperties:'./sonar-project.properties')
+				sonarPathProperties:'./sonar-project.properties')*/
 				
 				sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[carlos.presupuesto-carlos.barrera]', 
 				sonarName:'CeibaADN-Ceiba-Presupuesto(carlos.barrera)', 
@@ -107,7 +107,8 @@ pipeline{
                     steps{
                         echo "------------>Compilación backend<------------"
                         dir("${PROJECT_PATH_BACK}"){
-                            sh './gradlew build -x test'
+                            //sh './gradlew build -x test'
+							sh './gradlew --b ./build.gradle build -x test'
                         }
                     }
                 }
