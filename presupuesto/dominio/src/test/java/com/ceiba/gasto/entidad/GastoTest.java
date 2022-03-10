@@ -23,6 +23,7 @@ public class GastoTest {
         LocalDateTime fechaCreacion = LocalDateTime.now();
         //act
         Gasto gasto = new GastoTestDataBuilder().conId(1L).build();
+        fechaCreacion = gasto.getFechaGasto();
         //assert
         assertEquals(1, gasto.getId());
         assertEquals("123", gasto.getIdentificacionUsuario());
