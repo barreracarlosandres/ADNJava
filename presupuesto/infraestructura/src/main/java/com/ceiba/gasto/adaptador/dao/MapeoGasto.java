@@ -15,7 +15,7 @@ public class MapeoGasto implements RowMapper<DtoGasto>, MapperResult {
 
         Long id = resultSet.getLong("id");
         String identificacionUsuario = resultSet.getString("identificacion_usuario");
-        int valorGasto = resultSet.getInt("valor_gasto");
+        Long valorGasto = resultSet.getLong("valor_gasto");
         LocalDateTime fechaGasto = extraerLocalDateTime(resultSet, "fecha_gasto");
 
         return new DtoGasto(id, identificacionUsuario, valorGasto, fechaGasto);

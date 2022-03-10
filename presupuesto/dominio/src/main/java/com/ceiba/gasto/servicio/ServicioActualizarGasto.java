@@ -1,12 +1,13 @@
 package com.ceiba.gasto.servicio;
 
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.gasto.modelo.entidad.Gasto;
 import com.ceiba.gasto.puerto.repositorio.RepositorioGasto;
 
 public class ServicioActualizarGasto {
 
-    private static final String EL_USUARIO_NO_EXISTE_EN_EL_SISTEMA = "El no usuario existe en el sistema";
+    private static final String EL_GASTO_NO_EXISTE_EN_EL_SISTEMA = "El gasto no existe en el sistema";
 
     private final RepositorioGasto repositorioGasto;
 
@@ -20,9 +21,9 @@ public class ServicioActualizarGasto {
     }
 
     private void validarExistenciaPrevia(Gasto gasto) {
-        boolean existe = this.repositorioGasto.existePorId(gasto.getId());
+        boolean existe = this.repositorioGasto.existe(gasto.getId());
         if(!existe) {
-            throw new ExcepcionDuplicidad(EL_USUARIO_NO_EXISTE_EN_EL_SISTEMA);
+            throw new ExcepcionSinDatos(EL_GASTO_NO_EXISTE_EN_EL_SISTEMA);
         }
     }
 }

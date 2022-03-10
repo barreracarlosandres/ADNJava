@@ -15,6 +15,6 @@ public class ComandoGasto {
 
     private Long id;
     private String identificacionUsuario;
-    private int valorGasto;
+    private Long valorGasto;
     private LocalDateTime fechaGasto;
 }

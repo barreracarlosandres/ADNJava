@@ -24,9 +24,6 @@ public class RepositorioGastoMysql implements RepositorioGasto {
     @SqlStatement(namespace="gasto", value="existe")
     private static String sqlExiste;
 
-    @SqlStatement(namespace="gasto", value="existePorId")
-    private static String sqlExistePorId;
-
     public RepositorioGastoMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -57,12 +54,5 @@ public class RepositorioGastoMysql implements RepositorioGasto {
         this.customNamedParameterJdbcTemplate.actualizar(gasto, sqlActualizar);
     }
 
-    @Override
-    public boolean existePorId(Long id) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", id);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePorId,paramSource, Boolean.class);
-    }
 }
 

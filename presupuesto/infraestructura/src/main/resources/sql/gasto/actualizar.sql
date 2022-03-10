@@ -1,5 +1,5 @@
 update gasto
-set identificacionUsuario = :identificacionUsuario,
-	valorGasto = :valorGasto,
+set identificacion_usuario = :identificacionUsuario,
+	valor_gasto = :valorGasto,
 	fecha_gasto = :fechaGasto
 where id = :id

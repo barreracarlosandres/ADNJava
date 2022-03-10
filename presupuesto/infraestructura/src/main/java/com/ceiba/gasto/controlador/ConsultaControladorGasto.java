@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/gasto")
+@RequestMapping("/gastos")
 @Api(tags={"Controlador consulta gastos"})
 public class ConsultaControladorGasto {
 

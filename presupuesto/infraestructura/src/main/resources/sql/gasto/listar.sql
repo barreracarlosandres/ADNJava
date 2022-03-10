@@ -1,1 +1,1 @@
-select identificacionUsuario,valorGasto,fecha_gasto from gasto
+select identificacion_usuario,valor_gasto,fecha_gasto from gasto

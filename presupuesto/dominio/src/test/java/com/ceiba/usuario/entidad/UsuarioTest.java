@@ -16,7 +16,7 @@ public class UsuarioTest {
 
     @Test
     @DisplayName("Deberia crear correctamente el usuario")
-    void deberiaCrearCorrectamenteElUsusuario() {
+    void deberiaCrearCorrectamenteElUsuario() {
         // arrange
         //LocalDateTime fechaCreacion = LocalDateTime.now();
         //act
@@ -153,18 +153,4 @@ public class UsuarioTest {
                 },
                 ExcepcionValorInvalido.class, "La identificacionUsuario debe ser alfanumérico");
     }
-
-    /*@Test
-    void deberiaFallarSinFechaCreacion() {
-
-        //Arrange
-        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conFechaCreacion(null).conId(1L);
-        //act-assert
-        BasePrueba.assertThrows(() -> {
-                    usuarioTestDataBuilder.build();
-                },
-                ExcepcionValorObligatorio.class, "Se debe ingresar la fecha de creación");
-    }*/
-
-
 }

@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 public class DtoGasto {
     private Long id;
     private String identificacionUsuario;
-    private int valorGasto;
+    private Long valorGasto;
     private LocalDateTime fechaGasto;
 }

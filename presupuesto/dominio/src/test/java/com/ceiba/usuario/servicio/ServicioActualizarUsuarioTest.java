@@ -21,7 +21,7 @@ public class ServicioActualizarUsuarioTest {
         Mockito.when(repositorioUsuario.existePorIdentificacionUsuario(Mockito.anyString())).thenReturn(false);
         ServicioActualizarUsuario servicioActualizarUsuario = new ServicioActualizarUsuario(repositorioUsuario);
         // act - assert
-        BasePrueba.assertThrows(() -> servicioActualizarUsuario.ejecutar(usuario), ExcepcionSinDatos.class,"El no usuario existe en el sistema");
+        BasePrueba.assertThrows(() -> servicioActualizarUsuario.ejecutar(usuario), ExcepcionSinDatos.class,"El usuario no existe en el sistema");
     }
 
     @Test

@@ -5,22 +5,40 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+import static com.ceiba.dominio.ValidadorArgumento.*;
+
 @Getter
 public class Gasto {
 
-    private static final String SE_DEBE_INGRESAR_LA_FECHA_CREACION = "Se debe ingresar la fecha de creación";
-    private static final String LA_CLAVE_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "La clave debe tener una longitud mayor o igual a %s";
-    private static final String SE_DEBE_INGRESAR_LA_CLAVE = "Se debe ingresar la clave";
-    private static final String SE_DEBE_INGRESAR_EL_NOMBRE_DE_USUARIO = "Se debe ingresar el nombre de usuario";
+    private static final String SE_DEBE_INGRESAR_IDENTIFICACION_USUARIO = "Debe ingresar identificacionUsuario";
+    private static final String SE_DEBE_INGRESAR_VALOR_GASTO = "Debe ingresar valorGasto";
+    private static final String SE_DEBE_INGRESAR_FECHA_GASTO = "Debe ingresar fechaGasto";
 
-    private static final int LONGITUD_MINIMA_CLAVE = 4;
+    private static final int LONGITUD_MAXIMA_IDENTIFICACION_USUARIO = 15;
+    private static final int LONGITUD_MAXIMA_VALOR_GASTO = 7;
+
+    private static final String LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "identificacionUsuario no debe ser mayor a 15";
+    private static final String EL_VALOR_GASTO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "valorGasto no debe ser mayor a 7";
+
+    private static final String EL_FORMATO_IDENTIFICACION_USUARIO = "La identificacionUsuario debe ser alfanumérico";
+    private static final String EL_FORMATO_VALOR_GASTO = "varlosGasto debe ser numérico";
+    private static final String FORTAMO_ALFANUMERICO = "[A-Za-z0-9]+";
 
     private Long id;
     private String identificacionUsuario;
-    private int valorGasto;
+    private Long valorGasto;
     private LocalDateTime fechaGasto;
 
-    public Gasto(Long id, String identificacionUsuario, int valorGasto, LocalDateTime fechaGasto) {
+    public Gasto(Long id, String identificacionUsuario, Long valorGasto, LocalDateTime fechaGasto) {
+
+        validarObligatorio(identificacionUsuario, SE_DEBE_INGRESAR_IDENTIFICACION_USUARIO);
+        validarObligatorio(valorGasto, SE_DEBE_INGRESAR_VALOR_GASTO);
+        validarObligatorio(fechaGasto, SE_DEBE_INGRESAR_FECHA_GASTO);
+
+        validarRegex(identificacionUsuario,FORTAMO_ALFANUMERICO, EL_FORMATO_IDENTIFICACION_USUARIO);
+
+        validarLongitudMaxima(identificacionUsuario, LONGITUD_MAXIMA_IDENTIFICACION_USUARIO, LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
+        validarLongitudMaxima(valorGasto, LONGITUD_MAXIMA_VALOR_GASTO, EL_VALOR_GASTO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
 
         this.id = id;
         this.identificacionUsuario = identificacionUsuario;

@@ -29,10 +29,4 @@ public interface RepositorioGasto {
      */
     boolean existe(Long id);
 
-    /**
-     * Permite validar si existe un usuario con un nombre excluyendo un id
-     * @return si existe o no
-     */
-    boolean existePorId(Long id);
-
 }

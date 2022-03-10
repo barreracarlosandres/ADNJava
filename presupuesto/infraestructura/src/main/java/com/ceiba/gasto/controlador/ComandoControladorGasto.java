@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/gasto")
+@RequestMapping("/gastos")
 @Api(tags = { "Controlador comando gastos"})
 public class ComandoControladorGasto {
 
@@ -34,16 +34,15 @@ public class ComandoControladorGasto {
         return manejadorCrearGasto.ejecutar(comandoGasto);
     }
 
-    @DeleteMapping(value="/{id}")
-	@ApiOperation("Eliminar Gasto")
-	public void eliminar(@PathVariable Long id) {
-		manejadorEliminarGasto.ejecutar(id);
-	}
-
-	@PutMapping(value="/{id}")
+  	@PutMapping(value="/{id}")
 	@ApiOperation("Actualizar Gasto")
 	public void actualizar(@RequestBody ComandoGasto comandoGasto,@PathVariable Long id) {
 		comandoGasto.setId(id);
 		manejadorActualizarGasto.ejecutar(comandoGasto);
 	}
+
+	@DeleteMapping(value="/{id}")
+	@ApiOperation("Eliminar Gasto")
+	public void eliminar(@PathVariable Long id) { manejadorEliminarGasto.ejecutar(id); }
+
 }
