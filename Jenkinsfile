@@ -33,9 +33,12 @@ pipeline{
             password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a passwor')
      }*/
 
-		stages{
-        stage('Checkout') {
-            steps {
+	stages
+	{
+        stage('Checkout') 
+		{
+            steps 
+			{
                 echo '------------>Checkout desde Git Microservicio<------------'
                 //Esta opciÃ³n se usa para el checkout sencillo de un microservicio
                 checkout scm
@@ -47,7 +50,8 @@ pipeline{
                     urlComun: 'git@git.ceiba.com.co:ceiba_legos/comun.git'
                 )*/
 
-                dir("${PROJECT_PATH_BACK}"){
+                dir("${PROJECT_PATH_BACK}")
+				{
                     sh 'chmod +x ./gradlew'
                     sh './gradlew clean'
                 }
@@ -72,41 +76,29 @@ pipeline{
                         }
                     }
                 }
-                /*
-                stage('Test- Frontend'){
-                    steps {
-                        echo '------------>Test Frontend<------------'
-                        dir("${PROJECT_PATH_FRONT}"){
-                            // comando ejecucion test
-                        }
-                    }
-                }
-                */
             }
         }
 
 		
 		stage('Static Code Analysis')
 		{
-			steps{			sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:presupuestogastos.carlos.barrera',sonarName:'CeibaADN-PresupuestoGastos(carlos.barrera)',sonarPathProperties:'./sonar-project.properties')
-			}
+			steps{
+				sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:carlos.presupuestogastos-carlos.barrera',
+				sonarName:'CeibaADN-PresupuestoGastos-carlos.barrera',
+				sonarPathProperties:'./sonar-project.properties')
+				}
 		}
 
-        stage('Build'){
-            parallel {
-                stage('construcción Backend'){
-                    steps{
-                        echo "------------>Compilación backend<------------"
-						sh './gradlew --b ./build.gradle build -x test'
-                        /*dir("${PROJECT_PATH_BACK}"){
-                            //sh './gradlew build -x test'
-							sh './gradlew --b ./build.gradle build -x test'
-                        }*/
-                    }
-                }
-            }
-         }
-    }
+        stage('Build') 
+		{
+			steps {
+				echo "------------>Build<------------"
+				sh 'chmod +x ./certificaciones/gradlew'
+				sh './presupuesto/gradlew --b ./presupuesto/build.gradle clean'
+				sh './presupuesto/gradlew --b ./presupuesto/build.gradle build -x test'
+			}
+		}  
+	}
 
     post {
         failure {
