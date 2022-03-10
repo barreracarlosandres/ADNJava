@@ -65,19 +65,9 @@ pipeline{
                 stage('Test- Backend'){
                     steps {
                         echo '------------>Test Backend<------------'
-
-                        dir("${PROJECT_PATH_BACK}"){
-							sh 'chmod +x gradlew'
-							sh './gradlew --b ./build.gradle test'
-                        }
-                    }
-                    post{
-                        always {
-                            junit '**/build/test-results/test/*.xml' //Configuración de los reportes de JUnit
-                        }
-                    }
-					
-					
+						sh 'chmod +x ./presupuesto/gradlew'
+						sh './presupuesto/gradlew --b ./presupuesto/build.gradle clean'
+						sh './presupuesto/gradlew --b ./presupuesto/build.gradle test'
                 }
             }
         }

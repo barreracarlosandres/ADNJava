@@ -90,7 +90,7 @@ class GastoTest {
 
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder()
-                .conValorGasto(Long.parseLong(RandomStringUtils.randomNumeric(8)));
+                .conValorGasto(Long.parseLong(RandomStringUtils.randomNumeric(8))).conId(1L);
         //act-assert
         BasePrueba.assertThrows(() -> {
                     gastoTestDataBuilder.build();
