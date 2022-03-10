@@ -20,7 +20,9 @@ class ServicioActualizarGastoTest {
         Mockito.when(repositorioGasto.existe(Mockito.anyLong())).thenReturn(false);
         ServicioActualizarGasto servicioActualizarGasto = new ServicioActualizarGasto(repositorioGasto);
         // act - assert
-        BasePrueba.assertThrows(() -> servicioActualizarGasto.ejecutar(gasto), ExcepcionSinDatos.class,"El gasto no existe en el sistema");
+        BasePrueba.assertThrows(()
+                -> servicioActualizarGasto.ejecutar(gasto)
+                , ExcepcionSinDatos.class,"El gasto no existe en el sistema");
     }
 
     @Test

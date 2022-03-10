@@ -27,6 +27,7 @@ public class Gasto {
     private Long id;
     private String identificacionUsuario;
     private Long valorGasto;
+
     private LocalDateTime fechaGasto;
 
     public Gasto(Long id, String identificacionUsuario, Long valorGasto, LocalDateTime fechaGasto) {
