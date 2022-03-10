@@ -88,8 +88,7 @@ pipeline{
 		
 		stage('Static Code Analysis')
 		{
-			steps{
-			sonarqubeMasQualityGatesP(sonarKey:'"co.com.ceiba.adn:presupuestogasto.carlos.barrera"',sonarName:'CeibaADN-PresupuestoGastos(carlos.barrera)',sonarPathProperties:'./sonar-project.properties')
+			steps{			sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:presupuestogastos.carlos.barrera',sonarName:'CeibaADN-PresupuestoGastos(carlos.barrera)',sonarPathProperties:'./sonar-project.properties')
 			}
 		}
 
