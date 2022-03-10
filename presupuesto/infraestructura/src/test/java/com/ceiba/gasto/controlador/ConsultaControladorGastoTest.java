@@ -32,11 +32,14 @@ class ConsultaControladorGastoTest {
     void deberiaListarGasto() throws Exception {
         // arrange
         // act - assert
-        mocMvc.perform(get("/usuarios")
+        mocMvc.perform(get("/gastos")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].identificacionUsuario", is("94123123")));
+                .andExpect(jsonPath("$[0].identificacionUsuario", is("123")))
+                .andExpect(jsonPath("$[0].valorGasto", is(100)))
+                .andExpect(jsonPath("$[0].fechaGasto", is("2022-03-08 17:00:00")))
+                .andExpect(jsonPath("$[0].id", is(1)));
 
     }
 }
