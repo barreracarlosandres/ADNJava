@@ -94,7 +94,7 @@ pipeline{
 					sonarKey:'co.com.ceiba.adn:preupusetogasto.carlos.barrera', 
 					sonarName:'CeibaADN-PresupuestoGastos(carlos.barrera)', 
 					sonarPathProperties:'./sonar-project.properties')
-				)
+				}
 		}
 
         stage('Build'){
