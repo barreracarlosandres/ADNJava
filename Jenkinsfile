@@ -93,7 +93,7 @@ pipeline{
 		{
 			steps {
 				echo "------------>Build<------------"
-				sh 'chmod +x ./certificaciones/gradlew'
+				sh 'chmod +x ./presupuesto/gradlew'
 				sh './presupuesto/gradlew --b ./presupuesto/build.gradle clean'
 				sh './presupuesto/gradlew --b ./presupuesto/build.gradle build -x test'
 			}
