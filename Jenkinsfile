@@ -87,19 +87,14 @@ pipeline{
         }
 
 		
-		stage('Static Code Analysis') {
+		stage('Static Code Analysis') 
+		{
 			steps{
-				/*sonarqubeMasQualityGates(sonarKey:'com.ceiba.core.presupuesto', 
-				sonarName:'co.com.ceiba.presupuesto:presupuesto', 
-				sonarPathProperties:'./sonar-project.properties')*/
-				
-				sonarqubeMasQualityGatesP
-				(
-					sonarKey:'co.com.ceiba.adn:presupuestogastos.carlos.barrera', 
+				sonarqubeMasQualityGatesP(
+					sonarKey:'co.com.ceiba.adn:preupusetogasto.carlos.barrera', 
 					sonarName:'CeibaADN-PresupuestoGastos(carlos.barrera)', 
-					sonarPathProperties:'./sonar-project.properties'
-				)
-			}
+					sonarPathProperties:'./sonar-project.properties')
+				}
 		}
 
         stage('Build'){
