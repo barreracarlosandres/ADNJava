@@ -84,7 +84,7 @@ public class GastoTest {
     }
 
     @Test
-    @DisplayName("No debería ingresar valorUsuario sin tamaño permitido")
+    @DisplayName("No debería ingresar valorGasto sin tamaño permitido")
     void deberiaFallarSinValorGastoMayorTamanioPermitido() {
 
         //Arrange

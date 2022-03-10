@@ -10,16 +10,11 @@ public class GastoTestDataBuilder {
     private String identificacionUsuario;
     private Long valorGasto;
     private LocalDateTime fechaGasto;
-    private String valorGastoString;
-    private String fechaGastoString;
-
 
     public GastoTestDataBuilder() {
         identificacionUsuario = "123";
         valorGasto = 123L;
         fechaGasto = LocalDateTime.now();
-        valorGastoString = "sinFormatoNumerico";
-        fechaGastoString = "sinFormatoFecha";
     }
 
     public GastoTestDataBuilder conId(Long id) {
@@ -36,18 +31,8 @@ public class GastoTestDataBuilder {
         return this;
     }
 
-    public GastoTestDataBuilder conValorGastoString(String valorGastoString) {
-        this.valorGastoString = valorGastoString;
-        return this;
-    }
-
     public GastoTestDataBuilder conFechaGasto(LocalDateTime fechaGasto) {
         this.fechaGasto = fechaGasto;
-        return this;
-    }
-
-    public GastoTestDataBuilder conFechaGastoString(String fechaGastoString) {
-        this.fechaGastoString = fechaGastoString;
         return this;
     }
 
