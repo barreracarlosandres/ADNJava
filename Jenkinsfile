@@ -93,10 +93,9 @@ pipeline{
 				sonarName:'co.com.ceiba.presupuesto:presupuesto', 
 				sonarPathProperties:'./sonar-project.properties')*/
 				
-				sonarqubeMasQualityGates(sonarKey:'co.com.ceiba.adn:[carlos.presupuesto-carlos.barrera]', 
+				sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[presupuesto-carlos.barrera]', 
 				sonarName:'CeibaADN-Ceiba-Presupuesto(carlos.barrera)', 
 				sonarPathProperties:'./sonar-project.properties')
-
 			}
 		}
 
