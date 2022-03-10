@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ServicioCrearUsuarioTest {
+class ServicioCrearUsuarioTest {
 
     @Test
     @DisplayName("Deberia lanzar una exepecion cuando indentificacionUsuario mayor a 15")

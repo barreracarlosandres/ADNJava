@@ -1,6 +1,5 @@
 package com.ceiba.gasto.servicio;
 
-import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.gasto.modelo.entidad.Gasto;
 import com.ceiba.gasto.puerto.repositorio.RepositorioGasto;

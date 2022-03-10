@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GastoTest {
+class GastoTest {
 
     @Test
     @DisplayName("Deberia ingresar un gasto")
@@ -90,7 +90,7 @@ public class GastoTest {
 
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder()
-                .conValorGasto(Long.parseLong(RandomStringUtils.randomNumeric(8))).conId(1L);
+                .conValorGasto(Long.parseLong(RandomStringUtils.randomNumeric(8)));
         //act-assert
         BasePrueba.assertThrows(() -> {
                     gastoTestDataBuilder.build();

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class ServicioEliminarGastoTest {
+class ServicioEliminarGastoTest {
 
     @Test
     @DisplayName("Deberia eliminar el gasto llamando al repositorio")

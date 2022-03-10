@@ -12,7 +12,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UsuarioTest {
+class UsuarioTest {
 
     @Test
     @DisplayName("Deberia crear correctamente el usuario")

@@ -7,7 +7,7 @@ import com.ceiba.gasto.puerto.repositorio.RepositorioGasto;
 
 public class ServicioCrearGasto {
 
-    private static final String EL_USUARIO_YA_EXISTE_EN_EL_SISTEMA = "El usuario ya existe en el sistema";
+    private static final String EL_GASTO_YA_EXISTE_EN_EL_SISTEMA = "El gasto ya existe en el sistema";
 
     private final RepositorioGasto repositorioGasto;
 
@@ -23,7 +23,7 @@ public class ServicioCrearGasto {
     private void validarExistenciaPrevia(Gasto gasto) {
         boolean existe = this.repositorioGasto.existe(gasto.getId());
         if(existe) {
-            throw new ExcepcionDuplicidad(EL_USUARIO_YA_EXISTE_EN_EL_SISTEMA);
+            throw new ExcepcionDuplicidad(EL_GASTO_YA_EXISTE_EN_EL_SISTEMA);
         }
     }
 }
