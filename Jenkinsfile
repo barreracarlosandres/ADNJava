@@ -66,8 +66,8 @@ pipeline{
                     steps {
                         echo '------------>Test Backend<------------'
 						sh 'chmod +x ./presupuesto/gradlew'
-						sh './presupuesto/gradlew --b ./certificaciones/build.gradle clean'
-						sh './presupuesto/gradlew --b ./certificaciones/build.gradle test'
+						sh './presupuesto/gradlew --b ./presupusto/build.gradle clean'
+						sh './presupuesto/gradlew --b ./presupusto/build.gradle test'
                 }
             }
         }
