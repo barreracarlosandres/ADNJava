@@ -97,7 +97,16 @@ pipeline{
 				sh './presupuesto/gradlew --b ./presupuesto/build.gradle clean'
 				sh './presupuesto/gradlew --b ./presupuesto/build.gradle build -x test'
 			}
-		}  
+		}
+
+		stage('Build') 
+		{
+			steps 
+			{
+			echo "------------>Building<------------"
+			sh 'npm run build'
+			}
+		}		
 	}
 
     post {
