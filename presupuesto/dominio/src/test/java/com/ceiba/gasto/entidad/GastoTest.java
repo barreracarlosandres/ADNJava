@@ -10,8 +10,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GastoTest {
@@ -20,15 +18,13 @@ class GastoTest {
     @DisplayName("Deberia ingresar un gasto")
     void deberiaCrearCorrectamenteElGasto() {
         // arrange
-        LocalDateTime fechaCreacion = LocalDateTime.now();
         //act
         Gasto gasto = new GastoTestDataBuilder().conId(1L).build();
-        fechaCreacion = gasto.getFechaGasto();
         //assert
         assertEquals(1, gasto.getId());
         assertEquals("123", gasto.getIdentificacionUsuario());
         assertEquals(123, gasto.getValorGasto());
-        assertEquals(fechaCreacion, gasto.getFechaGasto());
+        assertEquals(gasto.getFechaGasto(), gasto.getFechaGasto());
     }
 
     @Test
@@ -73,7 +69,6 @@ class GastoTest {
     @Test
     @DisplayName("No debería ingresar identificacionUsuario sin tamaño permitido")
     void deberiaFallarSinIdentificacionMayorTamanioPermitido() {
-
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder()
                 .conIdentificacionUsuario(RandomStringUtils.randomAlphabetic(16)).conId(1L);
@@ -90,7 +85,7 @@ class GastoTest {
 
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder()
-                .conValorGasto(Long.parseLong(RandomStringUtils.randomNumeric(8))).conId(1L);
+                .conValorGasto(Long.parseLong(RandomStringUtils.randomNumeric(8)));
         //act-assert
         BasePrueba.assertThrows(() -> {
                     gastoTestDataBuilder.build();

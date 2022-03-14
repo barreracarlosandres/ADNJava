@@ -18,14 +18,6 @@ public class ComandoGastoTestDataBuilder {
         fechaGasto = LocalDateTime.now();
     }
 
-    public ComandoGastoTestDataBuilder conNombreApellidoIdentificacionUsuario(String identificacionUsuario
-    , Long valorGasto, LocalDateTime fechaGasto) {
-        this.identificacionUsuario = identificacionUsuario;
-        this.valorGasto = valorGasto;
-        this.fechaGasto = fechaGasto;
-        return this;
-    }
-
     public ComandoGasto build() {
         return new ComandoGasto(id, identificacionUsuario, valorGasto, fechaGasto);
     }

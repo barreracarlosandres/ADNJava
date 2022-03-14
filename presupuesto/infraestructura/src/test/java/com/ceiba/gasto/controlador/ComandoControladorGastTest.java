@@ -44,6 +44,22 @@ class ComandoControladorGastTest {
                 .andExpect(content().json("{'valor': 2}"));
     }
 
+    /*@Test
+    @DisplayName("No deberia ingresar un gasto por mal formato valorGasto")
+    void NoDeberiaIngresarGastoPorMalFormatoValorGasto() throws Exception{
+        // arrange
+        ComandoGasto gasto = new ComandoGastoTestDataBuilder().build();
+        // act - assert
+        mocMvc.perform(post("/gastos")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("identificacionUsuario", gasto.getIdentificacionUsuario())
+                        .param("valorGasto", "123")
+                        .param("fechaGasto", "2020-01-01 12:00:00"))
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json("{'valor': 2}"));
+    }*/
+
     @Test
     @DisplayName("Deberia actualizar un gasto")
     void deberiaActualizarUnGasto() throws Exception{

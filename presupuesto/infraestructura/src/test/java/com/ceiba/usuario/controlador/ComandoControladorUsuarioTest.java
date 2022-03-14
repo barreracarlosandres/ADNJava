@@ -4,7 +4,6 @@ import com.ceiba.ApplicationMock;
 import com.ceiba.usuario.comando.ComandoUsuario;
 import com.ceiba.usuario.servicio.testdatabuilder.ComandoUsuarioTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,7 +57,7 @@ class ComandoControladorUsuarioTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
+   @Test
     @DisplayName("Deberia eliminar un usuario")
     void deberiaEliminarUnUsuario() throws Exception {
         // arrange
@@ -74,5 +73,4 @@ class ComandoControladorUsuarioTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
-
 }
