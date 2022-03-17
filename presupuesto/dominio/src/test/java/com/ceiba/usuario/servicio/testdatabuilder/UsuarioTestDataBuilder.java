@@ -10,9 +10,9 @@ public class UsuarioTestDataBuilder {
     private String identificacionUsuario;
 
     public UsuarioTestDataBuilder() {
-        nombre = "nombreTest";
-        apellido = "apellidoTest";
-        identificacionUsuario = "identTest";
+        nombre = "Carlos Andrés";
+        apellido = "Barrera Santacruz";
+        identificacionUsuario = "CC94123123";
     }
 
     public UsuarioTestDataBuilder conNombre(String nombre) {

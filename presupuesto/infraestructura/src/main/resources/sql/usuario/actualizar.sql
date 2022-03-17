@@ -1,5 +1,4 @@
 update usuario
 set nombre = :nombre,
-	apellido = :apellido,
-	identificacion_usuario = :identificacionUsuario
+	apellido = :apellido
 where id = :id

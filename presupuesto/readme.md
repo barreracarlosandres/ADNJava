@@ -7,18 +7,20 @@
 
 
 #### Problema de negocio (Presupuesto)
-El objetivo de este desarrollo es aplicar las buenas practicas en el código y aplicar el ciclo completo en el que se inlcuye prubas unitarias CI, test entre otros en caso de negicio ADN Java
+El objetivo de este desarrollo es aplicar las buenas practicas en el código y ciclo completo en el que se inlcuye prubas unitarias,  CI, test entre otros en caso de negicio ADN Java
 
 ***Usuario tendrá los siguientes atributos***:  
 **identificacionUsuario**: número de identificacion del usuario (campo alfanumérico de máximo 15 dígitos)  
 **nombre**: string que tendrá el nombre o nombres del usuario (string de máximo 100 caracteres)  
 **apellido**: string que tendrá los apellidos del usuario (string de máximo 100 caracteres)   
 
-***Un presupuesto debe tener lo siguientes atributos:***  
-**fechaPresupuesto**: fecha que tendrá el año y mes (formato YYYY/DD)  
-**valorPresupuesto**: número que tendrá el presupuesto por ejecutar máximo en el mes en curso (máximo 7 dígitos)  
+***Presupuesto debe tener lo siguientes atributos:***  
+**identificacionUsuario**: número de identificacion del usuario (campo alfanumérico de máximo 15 dígitos) 
+**fechaPresupuesto**: fecha que tendrá el año y mes en que aplica el presupuesto (formato YYYY/DD)  
+**valorPresupuesto**: compo númericoo que tendrá el presupuesto por ejecutar máximo en el mes en curso (máximo 7 dígitos)  
 
-***Registro de gastos que tendrá los siguientes atributos:***
+***Gastos que tendrá los siguientes atributos:***  
+**identificacionUsuario**: número de identificación del usuario (campo alfanumérico de máximo 15 dígitos)  
 **fechaGasto**: fecha en la cual aplica la ejecución presupuestal (fomato YYYY/MM/DD)  
 **valorGasto**: número que tiene el valor del gasto ejecutado (máximo 7 dígitos)
 
@@ -28,10 +30,24 @@ Crear un API tipo REST el cual le permita llevar a cabo la siguientes funcionali
    1. crear
       1. todos los campos obligatorios
       2. validaciones y restricciones
-         1. tamaños máximos
-         2. formatos alfanumericos donde corresponde
+         1. identificacionUsuario:
+            1. Máximo 15 caractetes
+            2. Alfanumérico
+            3. Campo obligatorio
+            4. identificador único
+         2. nombre:
+            1. Máximo 100 caracteres
+            2. Sólo alfabeto, con acentos, con espacio (Ejemplo: "Carlos Andrés")
+            3. Campo obligatorio
+         3. apellido:
+            1. Máximo 100 caracteres
+            2. Sólo alfabeto, con acentos, con espacio
+            3. Campo obligatorio
    2. eliminar
+      1. Se alimina por id
    3. actualizar
+      1. Se actualizará por Id sólo nombre y/o apellido.
+      2. 
    4. buscar por nombre y apellido
    5. buscar por identificacionUsuario
    6. listar

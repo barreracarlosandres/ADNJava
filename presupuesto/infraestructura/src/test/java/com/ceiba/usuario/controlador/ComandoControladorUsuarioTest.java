@@ -45,16 +45,36 @@ class ComandoControladorUsuarioTest {
     }
 
     @Test
-    @DisplayName("Deberia actualizar un usuario")
+    @DisplayName("Deberia actualizar nombre y apellido de un usuario por Id e IdentificacionUsuario")
     void deberiaActualizarUnUsuario() throws Exception{
         // arrange
-        String identificacionUsuario = "94123123";
-        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
+        //String identificacionUsuario = "94123123";
+        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder()
+                .conId(1L)
+                .conIdentificacionUsuario("94123123")
+                .conNombre("Juan ")
+                .conApellido("Perez ")
+                .build();
         // act - assert
-        mocMvc.perform(put("/usuarios/{identificacionUsuario}",identificacionUsuario)
+        mocMvc.perform(put("/usuarios/{id}",usuario.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(usuario)))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("No deberia actualizar un usuario dado que no existe")
+    void NoDeriaActualizarUnUsuario() throws Exception{
+        // arrange
+        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder()
+                .conId(1L)
+                .conIdentificacionUsuario("941231231")
+                .build();
+        // act - assert
+        mocMvc.perform(put("/usuarios/{id}",usuario.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(usuario)))
+                .andExpect(status().isNotFound());
     }
 
    @Test

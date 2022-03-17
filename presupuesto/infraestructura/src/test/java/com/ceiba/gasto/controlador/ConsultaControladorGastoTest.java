@@ -28,7 +28,7 @@ class ConsultaControladorGastoTest {
     private MockMvc mocMvc;
 
     @Test
-    @DisplayName("Debería listar gastos")
+    @DisplayName("Deberia listar gastos")
     void deberiaListarGasto() throws Exception {
         // arrange
         // act - assert

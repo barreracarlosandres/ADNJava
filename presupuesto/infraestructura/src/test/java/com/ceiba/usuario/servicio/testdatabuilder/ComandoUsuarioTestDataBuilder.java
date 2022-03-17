@@ -16,6 +16,28 @@ public class ComandoUsuarioTestDataBuilder {
         identificacionUsuario = RandomStringUtils.randomAlphabetic(15);
     }
 
+    public ComandoUsuarioTestDataBuilder conId(Long id) {
+        this.id=id;
+        return this;
+    }
+
+    public ComandoUsuarioTestDataBuilder conIdentificacionUsuario(String identificacionUsuario) {
+        this.identificacionUsuario = identificacionUsuario;
+        return this;
+    }
+
+    public ComandoUsuarioTestDataBuilder conNombre(String nombre) {
+        this.nombre = nombre;
+        return this;
+    }
+
+    public ComandoUsuarioTestDataBuilder conApellido(String apellido) {
+        this.apellido = apellido;
+        return this;
+    }
+
+
+
     public ComandoUsuario build() {
         return new ComandoUsuario(id, nombre, apellido, identificacionUsuario);
     }
