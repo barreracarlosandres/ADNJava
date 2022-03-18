@@ -30,11 +30,11 @@ public class Presupuesto {
                                     LONGITUD_MAXIMA_VALOR_PRESUPUESTO);
 
     private static final String FORTAMATO_ALFANUMERICO = "[A-Za-z0-9]+";
-    private static final String FORTAMATO_FECHA_PRESUPUESTO = "^(\\d{4})-[0-1][0-9]-[0-3][0-9]$";
+    private static final String FORTAMATO_FECHA_PRESUPUESTO = "^(\\d{4})/[0-1][0-9]$";
 
     private static final String EL_FORMATO_IDENTIFICACION_USUARIO = "La identificacionUsuario debe ser alfanumérico";
     private static final String EL_FORMATO_VALOR_PRESUPUESTO = "valorPresupuesto debe ser numérico";
-    private static final String EL_FORTAMATO_FECHA_PRESUPUESTO = "fechaPresupuesto debe ser YYYY-MM-DD";
+    private static final String EL_FORTAMATO_FECHA_PRESUPUESTO = "fechaPresupuesto debe ser YYYY/MM";
 
     public Presupuesto(Long id, String identificacionUsuario, Long valorPresupuesto, String fechaPresupuesto) {
 
@@ -56,6 +56,6 @@ public class Presupuesto {
     }
 
     private static LocalDateTime getFechaDeString(String fechaPresupuesto) {
-        return LocalDateTime.parse(fechaPresupuesto + " 00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return LocalDateTime.parse(fechaPresupuesto + "/01 00:00", DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
     }
 }

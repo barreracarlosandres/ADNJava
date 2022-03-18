@@ -21,7 +21,7 @@ public class PresupuestoTestDataBuilder {
     private static String getFechaConFormato() {
         return LocalDateTime
                 .now()
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                .format(DateTimeFormatter.ofPattern("yyyy/MM"));
     }
 
     public PresupuestoTestDataBuilder conId(Long id) {

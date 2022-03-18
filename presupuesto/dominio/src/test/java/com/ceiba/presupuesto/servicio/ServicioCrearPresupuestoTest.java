@@ -3,6 +3,7 @@ package com.ceiba.presupuesto.servicio;
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.presupuesto.modelo.entidad.Presupuesto;
 import com.ceiba.presupuesto.puerto.repositorio.RepositorioPresupuesto;
 import com.ceiba.presupuesto.servicio.testdatabuilder.PresupuestoTestDataBuilder;
@@ -51,5 +52,68 @@ class ServicioCrearPresupuestoTest {
         //- assert
         assertEquals(10L,idPresupuesto);
         Mockito.verify(repositorioPresupuesto, Mockito.times(1)).crear(presupuesto);
+    }
+
+    @Test
+    @DisplayName("No debería ingresar identificacionUsuario sin tamaño permitido")
+    void NoDeberiaCrearPresupuestoConIdentificacionMayorAlTamanioPermitido() {
+        //Arrange
+        PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
+                .conIdentificacionUsuario(getRandomStringAlfabetoDe16()).conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    PresupuestoTestDataBuilder.build();
+                },
+                ExcepcionLongitudValor.class, "identificacionUsuario no debe ser mayor a 15");
+    }
+
+    @Test
+    @DisplayName("No debería ingresar valorPresupuesto sin tamaño permitido")
+    void NoDeberiaCrearPresupuestoConValorPresupuestoMayorAlTamanioPermitido() {
+
+        //Arrange
+        PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
+                .conValorPresupuesto(getRandomNumeroDe8());
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    PresupuestoTestDataBuilder.build();
+                },
+                ExcepcionLongitudValor.class, "valorPresupuesto no debe ser mayor a 7");
+    }
+
+    @Test
+    @DisplayName("No debería ingresar identificacionUsuario sin formato alfanumérico ")
+    void NoDeberiaCrearPresupuestoSinFormadoIdentificacionUsuarioAlafanumerico() {
+
+        //Arrange
+        PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
+                .conIdentificacionUsuario("**").conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    PresupuestoTestDataBuilder.build();
+                },
+                ExcepcionValorInvalido.class, "La identificacionUsuario debe ser alfanumérico");
+    }
+
+    @Test
+    @DisplayName("No debería ingresar fechaPresupuesto sin formato adecuado ")
+    void NoDeberiaCrearPresupuestoSinFormadoFechaPresupuestoConFormatoValido() {
+
+        //Arrange
+        PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
+                .conFechaPresupuesto("2021-01").conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    PresupuestoTestDataBuilder.build();
+                },
+                ExcepcionValorInvalido.class, "fechaPresupuesto debe ser YYYY/MM");
+    }
+
+    private static long getRandomNumeroDe8() {
+        return Long.parseLong(RandomStringUtils.randomNumeric(8));
+    }
+
+    private static  String getRandomStringAlfabetoDe16() {
+        return RandomStringUtils.randomAlphabetic(16);
     }
 }

@@ -42,7 +42,7 @@ class UsuarioTest {
 
     @Test
     @DisplayName("No debería ingresar un usuario sin atributo apellido")
-    void NoDeberiaIngresarUsuarioSinApellido() {
+    void NoDeberiaCrearUsuarioSinApellido() {
 
         //Arrange
         UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conApellido(null);
@@ -55,7 +55,7 @@ class UsuarioTest {
 
     @Test
     @DisplayName("No debería ingresar un usuario sin atributo identificacionUsuario")
-    void NoDeberiaIngresarUsuarioSinIdentificacionUsuario() {
+    void NoDeberiaCrearUsuarioSinIdentificacionUsuario() {
 
         //Arrange
         UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conIdentificacionUsuario(null);

@@ -29,7 +29,7 @@ class PresupuestoTest {
 
     @Test
     @DisplayName("No debería ingresar sin identificacionUsuario")
-    void deberiaFallarSinIdentificacionUsuario() {
+    void NoDeberiaCrearPresupuestoSinIdentificacionUsuario() {
 
         //Arrange
         PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder().conIdentificacionUsuario(null).conId(1L);
@@ -42,7 +42,7 @@ class PresupuestoTest {
 
     @Test
     @DisplayName("No debería ingresar sin valorPresupuesto")
-    void deberiaFallarSinVarlorPresupuesto() {
+    void NoDeberiaCrearPresupuestoSinVarlorPresupuesto() {
 
         //Arrange
         PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder().conValorPresupuesto(null).conId(1L);
@@ -55,7 +55,7 @@ class PresupuestoTest {
 
     @Test
     @DisplayName("No debería ingresar sin fechaPresupuesto")
-    void deberiaFallarSinFechaPresupuesto() {
+    void NoDeberiaCrearPresupuestoSinFechaPresupuesto() {
 
         //Arrange
         PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder().conFechaPresupuesto(null).conId(1L);
@@ -64,54 +64,5 @@ class PresupuestoTest {
                     PresupuestoTestDataBuilder.build();
                 },
                 ExcepcionValorObligatorio.class, "Debe ingresar fechaPresupuesto");
-    }
-
-    @Test
-    @DisplayName("No debería ingresar identificacionUsuario sin tamaño permitido")
-    void deberiaFallarSinIdentificacionMayorTamanioPermitido() {
-        //Arrange
-        PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
-                .conIdentificacionUsuario(getRandomStringAlfabetoDe16()).conId(1L);
-        //act-assert
-        BasePrueba.assertThrows(() -> {
-                    PresupuestoTestDataBuilder.build();
-                },
-                ExcepcionLongitudValor.class, "identificacionUsuario no debe ser mayor a 15");
-    }
-
-    @Test
-    @DisplayName("No debería ingresar valorPresupuesto sin tamaño permitido")
-    void deberiaFallarSinValorPresupuestoMayorTamanioPermitido() {
-
-        //Arrange
-        PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
-                .conValorPresupuesto(getRandomNumeroDe8());
-        //act-assert
-        BasePrueba.assertThrows(() -> {
-                    PresupuestoTestDataBuilder.build();
-                },
-                ExcepcionLongitudValor.class, "valorPresupuesto no debe ser mayor a 7");
-    }
-
-    @Test
-    @DisplayName("No debería ingresar identificacionUsuario sin formato alfanumérico ")
-    void deberiaFallarSinIdentificacionUsuarioAlafanumerico() {
-
-        //Arrange
-        PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
-                .conIdentificacionUsuario("**").conId(1L);
-        //act-assert
-        BasePrueba.assertThrows(() -> {
-                    PresupuestoTestDataBuilder.build();
-                },
-                ExcepcionValorInvalido.class, "La identificacionUsuario debe ser alfanumérico");
-    }
-
-    private static long getRandomNumeroDe8() {
-        return Long.parseLong(RandomStringUtils.randomNumeric(8));
-    }
-
-    private static  String getRandomStringAlfabetoDe16() {
-        return RandomStringUtils.randomAlphabetic(16);
     }
 }
