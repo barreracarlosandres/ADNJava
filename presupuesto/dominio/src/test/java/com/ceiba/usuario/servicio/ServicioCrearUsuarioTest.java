@@ -50,7 +50,7 @@ class ServicioCrearUsuarioTest {
 
         //Arrange
         UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
-                .conIdentificacionUsuario(RandomStringUtils.randomAlphabetic(16));
+                .conIdentificacionUsuario(getRandomStringAlfabeto(16));
         //act-assert
         BasePrueba.assertThrows(() -> {
                     usuarioTestDataBuilder.build();
@@ -64,7 +64,7 @@ class ServicioCrearUsuarioTest {
 
         //Arrange
         UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
-                .conNombre(RandomStringUtils.randomAlphabetic(101));
+                .conNombre(getRandomStringAlfabeto(101));
         //act-assert
         BasePrueba.assertThrows(() -> {
                     usuarioTestDataBuilder.build();
@@ -78,7 +78,7 @@ class ServicioCrearUsuarioTest {
 
         //Arrange
         UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder()
-                .conApellido(RandomStringUtils.randomAlphabetic(101));
+                .conApellido(getRandomStringAlfabeto(101));
         //act-assert
         BasePrueba.assertThrows(() -> {
                     usuarioTestDataBuilder.build();
@@ -126,5 +126,9 @@ class ServicioCrearUsuarioTest {
                     usuarioTestDataBuilder.build();
                 },
                 ExcepcionValorInvalido.class, "La identificacionUsuario debe ser alfanumérico");
+    }
+
+    private static  String getRandomStringAlfabeto(int tammano) {
+        return RandomStringUtils.randomAlphabetic(tammano);
     }
 }
