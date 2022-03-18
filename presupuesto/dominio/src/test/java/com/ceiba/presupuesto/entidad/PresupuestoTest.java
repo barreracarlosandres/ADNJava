@@ -71,7 +71,7 @@ class PresupuestoTest {
     void deberiaFallarSinIdentificacionMayorTamanioPermitido() {
         //Arrange
         PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
-                .conIdentificacionUsuario(getRandomStringAlfabeto(16)).conId(1L);
+                .conIdentificacionUsuario(getRandomStringAlfabetoDe16()).conId(1L);
         //act-assert
         BasePrueba.assertThrows(() -> {
                     PresupuestoTestDataBuilder.build();
@@ -85,7 +85,7 @@ class PresupuestoTest {
 
         //Arrange
         PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
-                .conValorPresupuesto(getRandomNumero(8));
+                .conValorPresupuesto(getRandomNumeroDe8());
         //act-assert
         BasePrueba.assertThrows(() -> {
                     PresupuestoTestDataBuilder.build();
@@ -107,11 +107,11 @@ class PresupuestoTest {
                 ExcepcionValorInvalido.class, "La identificacionUsuario debe ser alfanumérico");
     }
 
-    private static long getRandomNumero(int tamanno) {
-        return Long.parseLong(RandomStringUtils.randomNumeric(tamanno));
+    private static long getRandomNumeroDe8() {
+        return Long.parseLong(RandomStringUtils.randomNumeric(8));
     }
 
-    private static  String getRandomStringAlfabeto(int tammano) {
-        return RandomStringUtils.randomAlphabetic(tammano);
+    private static  String getRandomStringAlfabetoDe16() {
+        return RandomStringUtils.randomAlphabetic(16);
     }
 }

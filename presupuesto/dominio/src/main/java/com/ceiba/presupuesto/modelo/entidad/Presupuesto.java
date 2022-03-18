@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 import static com.ceiba.dominio.ValidadorArgumento.*;
 
+@SuppressWarnings("FieldMayBeFinal")
 @Getter
 public class Presupuesto {
 
@@ -54,7 +55,7 @@ public class Presupuesto {
         this.fechaPresupuesto = getFechaDeString(fechaPresupuesto);
     }
 
-    private LocalDateTime getFechaDeString(String fechaPresupuesto) {
+    private static LocalDateTime getFechaDeString(String fechaPresupuesto) {
         return LocalDateTime.parse(fechaPresupuesto + " 00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }

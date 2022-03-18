@@ -13,9 +13,9 @@ class ServicioEliminarPresupuestoTest {
         RepositorioPresupuesto repositorioPresupuesto = Mockito.mock(RepositorioPresupuesto.class);
         ServicioEliminarPresupuesto servicioEliminarPresupuesto = new ServicioEliminarPresupuesto(repositorioPresupuesto);
 
-        servicioEliminarPresupuesto.ejecutar(1l);
+        servicioEliminarPresupuesto.ejecutar(1L);
 
-        Mockito.verify(repositorioPresupuesto, Mockito.times(1)).eliminar(1l);
+        Mockito.verify(repositorioPresupuesto, Mockito.times(1)).eliminar(1L);
 
     }
 

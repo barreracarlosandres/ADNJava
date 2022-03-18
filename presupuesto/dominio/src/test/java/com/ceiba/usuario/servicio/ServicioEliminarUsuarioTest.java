@@ -13,8 +13,8 @@ class ServicioEliminarUsuarioTest {
         RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
         ServicioEliminarUsuario servicioEliminarUsuario = new ServicioEliminarUsuario(repositorioUsuario);
 
-        servicioEliminarUsuario.ejecutar(1l);
+        servicioEliminarUsuario.ejecutar(1L);
 
-        Mockito.verify(repositorioUsuario, Mockito.times(1)).eliminarPorId(1l);
+        Mockito.verify(repositorioUsuario, Mockito.times(1)).eliminarPorId(1L);
     }
 }

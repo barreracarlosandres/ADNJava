@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import static com.ceiba.dominio.ValidadorArgumento.*;
 
+@SuppressWarnings("FieldMayBeFinal")
 @Getter
 public class Usuario {
 
@@ -26,6 +27,7 @@ public class Usuario {
     private static final String EL_FORMATO_IDENTIFICACION_USUARIO = "La identificacionUsuario debe ser alfanumérico";
     private static final String FORTAMO_ALFANUMERICO = "[A-Za-z0-9]+";
     private static final String FORTAMO_ALFABETO_ESPACIO_ACENTOS = "[A-Za-zÀ-ÿ\\u00f1\\u00d1 ]+";
+
 
     private Long id;
     private String nombre;
