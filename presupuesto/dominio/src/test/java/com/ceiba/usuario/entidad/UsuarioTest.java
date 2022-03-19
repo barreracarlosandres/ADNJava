@@ -4,14 +4,31 @@ import com.ceiba.BasePrueba;
 
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.usuario.modelo.entidad.Usuario;
+import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
+import com.ceiba.usuario.servicio.ServicioCrearUsuario;
 import com.ceiba.usuario.servicio.testdatabuilder.UsuarioTestDataBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UsuarioTest {
+
+    @Test
+    @DisplayName("Debería crear usuario")
+    void deberiaCrearUsuario() {
+        // arrange
+        Usuario usuario = new UsuarioTestDataBuilder().conId(1L).build();
+        RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
+        Mockito.when(repositorioUsuario.existePorIdentificacionUsuario(Mockito.anyString())).thenReturn(false);
+        ServicioCrearUsuario servicioCrearUsuario = new ServicioCrearUsuario(repositorioUsuario);
+        // act
+        servicioCrearUsuario.ejecutar(usuario);
+        //assert
+        Mockito.verify(repositorioUsuario,Mockito.times(1)).crear(usuario);
+    }
 
     @Test
     @DisplayName("Deberia crear correctamente el usuario")

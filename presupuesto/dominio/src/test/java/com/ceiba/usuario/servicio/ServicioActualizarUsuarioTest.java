@@ -36,18 +36,4 @@ class ServicioActualizarUsuarioTest {
         // act - assert
         BasePrueba.assertThrows(() -> servicioActualizarUsuario.ejecutar(usuario), ExcepcionSinDatos.class,"El usuario no existe en el sistema");
     }
-
-    /*@Test
-    @DisplayName("No debería sin tamaño identificacionUsuario mayor al permitido")
-    void NoDeberiaIngresarUsuarioConIdentificacionUsuarioMayorAlPermitido() {
-
-        Usuario usuario = new UsuarioTestDataBuilder().conIdentificacionUsuario("df").conId(1L).build();
-        RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
-        Mockito.when(repositorioUsuario.existePorIdentificacionUsuario(Mockito.anyString())).thenReturn(true);
-        ServicioActualizarUsuario servicioActualizarUsuario = new ServicioActualizarUsuario(repositorioUsuario);
-        // act
-        servicioActualizarUsuario.ejecutar(usuario);
-        //assert
-        Mockito.verify(repositorioUsuario,Mockito.times(1)).actualizar(usuario);
-    }*/
 }

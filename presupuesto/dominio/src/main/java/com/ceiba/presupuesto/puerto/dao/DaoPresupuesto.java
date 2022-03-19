@@ -4,7 +4,6 @@ import com.ceiba.presupuesto.modelo.dto.DtoPresupuesto;
 
 import java.util.List;
 
-@SuppressWarnings("unused")
 public interface DaoPresupuesto {
 
     /**

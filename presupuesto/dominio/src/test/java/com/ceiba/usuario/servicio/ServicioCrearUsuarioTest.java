@@ -36,7 +36,9 @@ class ServicioCrearUsuarioTest {
     @DisplayName("Deberia lanzar una exepcion cuando se valide la existencia del Usuario")
     void deberiaLanzarUnaExepcionCuandoSeValideLaExistenciaDelUsuario() {
         // arrange
-        Usuario usuario = new UsuarioTestDataBuilder().build();
+        Usuario usuario = new UsuarioTestDataBuilder()
+                .conIdentificacionUsuario("94")
+                .build();
         RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
         Mockito.when(repositorioUsuario.existePorIdentificacionUsuario(Mockito.anyString())).thenReturn(true);
         ServicioCrearUsuario servicioCrearUsuario = new ServicioCrearUsuario(repositorioUsuario);

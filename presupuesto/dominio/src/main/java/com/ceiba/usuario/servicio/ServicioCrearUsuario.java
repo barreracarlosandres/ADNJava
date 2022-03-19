@@ -21,8 +21,8 @@ public class ServicioCrearUsuario {
     }
 
     private void validarExistenciaPrevia(Usuario usuario) {
-        boolean existePorIdentificacionUsuario = this.repositorioUsuario.existePorIdentificacionUsuario(usuario.getIdentificacionUsuario());
-        if(existePorIdentificacionUsuario) {
+        boolean existe = this.repositorioUsuario.existePorIdentificacionUsuario(usuario.getIdentificacionUsuario());
+        if(existe) {
             throw new ExcepcionDuplicidad(EL_USUARIO_YA_EXISTE_EN_EL_SISTEMA);
         }
     }

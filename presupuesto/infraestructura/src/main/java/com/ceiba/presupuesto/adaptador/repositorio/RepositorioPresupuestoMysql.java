@@ -43,18 +43,26 @@ public class RepositorioPresupuestoMysql implements RepositorioPresupuesto {
 
     @Override
     public void eliminar(Long id) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", id);
+        MapSqlParameterSource paramSource = getMapSqlParameterSource(id);
 
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
     }
 
     @Override
     public boolean existe(Long id) {
+        MapSqlParameterSource paramSource = getMapSqlParameterSource(id);
+
+        return ejecutooQuery(sqlExiste, paramSource);
+    }
+
+    private Boolean ejecutooQuery(String sqlExiste, MapSqlParameterSource paramSource) {
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste, paramSource, Boolean.class);
+    }
+
+    private MapSqlParameterSource getMapSqlParameterSource(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
+        return paramSource;
     }
 
     @Override
@@ -62,7 +70,7 @@ public class RepositorioPresupuestoMysql implements RepositorioPresupuesto {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("identificacionUsuario", identificacionUsuario);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteUsuarioPorIdentificacionUsuario,paramSource, Boolean.class);
+        return ejecutooQuery(sqlExisteUsuarioPorIdentificacionUsuario, paramSource);
     }
 
     @Override
@@ -71,7 +79,7 @@ public class RepositorioPresupuestoMysql implements RepositorioPresupuesto {
         paramSource.addValue("identificacionUsuario", identificacionUsuario);
         paramSource.addValue("fechaPresupuesto", fechaPresupuesto);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePresupuesto,paramSource, Boolean.class);
+        return ejecutooQuery(sqlExistePresupuesto, paramSource);
     }
 
     @Override

@@ -19,6 +19,11 @@ public class ComandoGastoTestDataBuilder {
         fechaGasto = LocalDateTime.now();
     }
 
+    public ComandoGastoTestDataBuilder conId(Long id){
+        this.id=id;
+        return this;
+    }
+
     public ComandoGastoTestDataBuilder conIdentificacionUsuario(String identificacionUsuario){
         this.identificacionUsuario=identificacionUsuario;
         return this;

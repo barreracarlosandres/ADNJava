@@ -52,6 +52,23 @@ class ComandoControladorGastTest {
     }
 
     @Test
+    @DisplayName("No deberia actualzia un gasto por que no existe gasto")
+    void NoDeberiaCrearGastoPorQueNoExistente() throws Exception{
+        // arrange
+        Long id = 10L;
+        ComandoGasto gasto = new ComandoGastoTestDataBuilder()
+                .conIdentificacionUsuario(getIdentifacionUsuarioExistente())
+                .conFechaGasto(getFechaBaseExistente())
+                .conValorGasto(1L)
+                .build();
+        // act - assert
+        mocMvc.perform(put("/gastos/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(gasto)))
+                .andExpect(content().json("{'mensaje': 'El gasto no existe en el sistema'}"));
+    }
+
+    @Test
     @DisplayName("No deberia ingresar un gasto por presupusto no existente")
     void NoDeberiaCrearGastoPorPresupuestoNoExistente() throws Exception{
         // arrange
@@ -90,6 +107,7 @@ class ComandoControladorGastTest {
         ComandoGasto gasto = new ComandoGastoTestDataBuilder()
                 .conIdentificacionUsuario(getIdentifacionUsuarioExistente())
                 .conFechaGasto(getFechaBaseExistente())
+                .conValorGasto(1L)
                 .build();
         // act - assert
         mocMvc.perform(put("/gastos/{id}",id)

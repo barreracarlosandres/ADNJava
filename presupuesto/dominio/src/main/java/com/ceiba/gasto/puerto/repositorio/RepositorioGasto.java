@@ -23,6 +23,12 @@ public interface RepositorioGasto {
      * Permite validar si existe un usuario con un nombre
      * @return si existe o no
      */
+    boolean existe(Long id);
+
+    /**
+     * Permite validar si existe un usuario con un nombre
+     * @return si existe o no
+     */
     boolean existePresupuesto(Gasto gasto);
 
     /**
