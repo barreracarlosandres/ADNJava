@@ -11,6 +11,7 @@ import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 
+@SuppressWarnings("unused")
 public class ValidadorArgumento {
 	
 	private ValidadorArgumento() {}
