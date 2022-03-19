@@ -24,8 +24,8 @@ public class RepositorioGastoMysql implements RepositorioGasto {
     @SqlStatement(namespace="gasto", value="sumaGastoPorFecha")
     private static String sqlSumaGastoPorFecha;
 
-    @SqlStatement(namespace="presupuesto", value="existePorIdentificacionUsuarioYPorFechaPresupuesto")
-    private static String sqlExistePresupuestoPorIdentificacionUsuarioYFechaPresupuesto;
+    @SqlStatement(namespace="presupuesto", value="existePresupuesto")
+    private static String sqlExistePresupuesto;
 
     @SqlStatement(namespace="presupuesto", value="valorPresupuestoPorFecha")
     private static String sqlVarlorPresupuestoPorFecha;
@@ -65,7 +65,9 @@ public class RepositorioGastoMysql implements RepositorioGasto {
     public boolean existePresupuesto(Gasto gasto) {
         MapSqlParameterSource paramSource = getMapSqlParametros(gasto, "fechaPresupuesto");
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePresupuestoPorIdentificacionUsuarioYFechaPresupuesto,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate
+                .getNamedParameterJdbcTemplate()
+                .queryForObject(sqlExistePresupuesto,paramSource, Boolean.class);
     }
 
     @Override

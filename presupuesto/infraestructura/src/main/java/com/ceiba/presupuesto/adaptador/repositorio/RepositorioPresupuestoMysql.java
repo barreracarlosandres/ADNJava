@@ -26,8 +26,8 @@ public class RepositorioPresupuestoMysql implements RepositorioPresupuesto {
     @SqlStatement(namespace="presupuesto", value="existe")
     private static String sqlExiste;
 
-    @SqlStatement(namespace="presupuesto", value="existePorIdentificacionUsuarioYPorFechaPresupuesto")
-    private static String existePorIdentificacionUsuarioYFechaPresupuesto;
+    @SqlStatement(namespace="presupuesto", value="existePresupuesto")
+    private static String sqlExistePresupuesto;
 
     @SqlStatement(namespace="usuario", value="existePorIdentificacionUsuario")
     private static String sqlExisteUsuarioPorIdentificacionUsuario;
@@ -71,7 +71,7 @@ public class RepositorioPresupuestoMysql implements RepositorioPresupuesto {
         paramSource.addValue("identificacionUsuario", identificacionUsuario);
         paramSource.addValue("fechaPresupuesto", fechaPresupuesto);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(existePorIdentificacionUsuarioYFechaPresupuesto,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePresupuesto,paramSource, Boolean.class);
     }
 
     @Override
