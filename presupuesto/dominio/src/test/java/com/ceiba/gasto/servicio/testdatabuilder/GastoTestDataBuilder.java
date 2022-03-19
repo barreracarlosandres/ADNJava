@@ -3,6 +3,7 @@ package com.ceiba.gasto.servicio.testdatabuilder;
 import com.ceiba.gasto.modelo.entidad.Gasto;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class GastoTestDataBuilder {
 
@@ -12,9 +13,10 @@ public class GastoTestDataBuilder {
     private LocalDateTime fechaGasto;
 
     public GastoTestDataBuilder() {
-        identificacionUsuario = "123";
-        valorGasto = 123L;
-        fechaGasto = LocalDateTime.now();
+        identificacionUsuario = "94123123";
+        valorGasto = 100L;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        fechaGasto = LocalDateTime.parse("2022-03-08 17:00:00", formatter);
     }
 
     public GastoTestDataBuilder conId(Long id) {

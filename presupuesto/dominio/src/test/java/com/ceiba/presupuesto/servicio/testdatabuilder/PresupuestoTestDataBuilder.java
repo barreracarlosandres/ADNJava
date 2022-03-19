@@ -14,7 +14,7 @@ public class PresupuestoTestDataBuilder {
 
     public PresupuestoTestDataBuilder() {
         identificacionUsuario = "94123123";
-        valorPresupuesto = 123L;
+        valorPresupuesto = 500L;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         fechaPresupuesto = LocalDateTime.parse("2022-03-08 17:00:00", formatter);
     }

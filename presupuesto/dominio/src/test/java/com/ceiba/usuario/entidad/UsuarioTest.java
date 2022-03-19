@@ -17,14 +17,13 @@ class UsuarioTest {
     @DisplayName("Deberia crear correctamente el usuario")
     void deberiaCrearCorrectamenteElUsuario() {
         // arrange
-        //LocalDateTime fechaCreacion = LocalDateTime.now();
         //act
         Usuario usuario = new UsuarioTestDataBuilder().conId(1L).build();
         //assert
         assertEquals(1, usuario.getId());
         assertEquals("Carlos Andrés", usuario.getNombre());
         assertEquals("Barrera Santacruz", usuario.getApellido());
-        assertEquals("CC94123123", usuario.getIdentificacionUsuario());
+        assertEquals("94123123", usuario.getIdentificacionUsuario());
     }
 
     @Test

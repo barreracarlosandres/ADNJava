@@ -12,7 +12,7 @@ public class UsuarioTestDataBuilder {
     public UsuarioTestDataBuilder() {
         nombre = "Carlos Andrés";
         apellido = "Barrera Santacruz";
-        identificacionUsuario = "CC94123123";
+        identificacionUsuario = "94123123";
     }
 
     public UsuarioTestDataBuilder conNombre(String nombre) {

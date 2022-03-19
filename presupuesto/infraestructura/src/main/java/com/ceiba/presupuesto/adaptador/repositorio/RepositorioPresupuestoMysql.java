@@ -23,6 +23,9 @@ public class RepositorioPresupuestoMysql implements RepositorioPresupuesto {
     @SqlStatement(namespace="presupuesto", value="eliminar")
     private static String sqlEliminar;
 
+    @SqlStatement(namespace="presupuesto", value="existe")
+    private static String sqlExiste;
+
     @SqlStatement(namespace="presupuesto", value="existePorIdentificacionUsuarioYPorFechaPresupuesto")
     private static String existePorIdentificacionUsuarioYFechaPresupuesto;
 
@@ -44,6 +47,14 @@ public class RepositorioPresupuestoMysql implements RepositorioPresupuesto {
         paramSource.addValue("id", id);
 
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
+    }
+
+    @Override
+    public boolean existe(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
     }
 
     @Override

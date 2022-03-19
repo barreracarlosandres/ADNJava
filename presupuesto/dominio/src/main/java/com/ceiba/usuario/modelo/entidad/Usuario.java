@@ -5,7 +5,6 @@ import lombok.Getter;
 
 import static com.ceiba.dominio.ValidadorArgumento.*;
 
-@SuppressWarnings("FieldMayBeFinal")
 @Getter
 public class Usuario {
 

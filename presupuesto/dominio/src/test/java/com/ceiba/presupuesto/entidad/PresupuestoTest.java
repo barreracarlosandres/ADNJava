@@ -1,12 +1,9 @@
 package com.ceiba.presupuesto.entidad;
 
 import com.ceiba.BasePrueba;
-import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
-import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.presupuesto.modelo.entidad.Presupuesto;
 import com.ceiba.presupuesto.servicio.testdatabuilder.PresupuestoTestDataBuilder;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +20,7 @@ class PresupuestoTest {
         //assert
         assertEquals(1, presupuesto.getId());
         assertEquals("94123123", presupuesto.getIdentificacionUsuario());
-        assertEquals(123, presupuesto.getValorPresupuesto());
+        assertEquals(500, presupuesto.getValorPresupuesto());
         assertEquals(presupuesto.getFechaPresupuesto(), presupuesto.getFechaPresupuesto());
     }
 

@@ -99,6 +99,20 @@ class ComandoControladorPresupuestoTest {
     }
 
     @Test
+    @DisplayName("Deberia actualizar un presupuesto existente")
+    void NoDeberiaActualizarUnPresupuestoDadoQueNoExiste() throws Exception{
+        // arrange
+        Long id = 10L;
+        ComandoPresupuesto presupuesto = new ComandoPresupuestoTestDataBuilder().build();
+        // act - assert
+        mocMvc.perform(put("/presupuesto/{id}",id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(presupuesto)))
+                .andExpect(status().isNotFound())
+                .andExpect(content().json("{'mensaje': 'El presupuesto no existe en el sistema'}"));;
+    }
+
+    @Test
     @DisplayName("Deberia eliminar un presupuesto")
     void deberiaEliminarUnGasto() throws Exception {
         // arrange

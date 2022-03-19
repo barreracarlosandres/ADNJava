@@ -8,7 +8,7 @@ import com.ceiba.gasto.puerto.repositorio.RepositorioGasto;
 
 public class ServicioCrearGasto {
 
-    private static final String NO_ESISTE_PRESUPUESTO = "No existe un presupuesto para aplicar el gasto";
+    private static final String NO_EXISTE_PRESUPUESTO = "No existe un presupuesto para aplicar el gasto";
     private static final String SE_SUPERO_EL_PRESUPUESTO = "Se superó el valor del presupuesto";
 
     private final RepositorioGasto repositorioGasto;
@@ -26,7 +26,7 @@ public class ServicioCrearGasto {
     private void validarExistenciaDePresupuesto(Gasto gasto) {
         boolean existe = this.repositorioGasto.existePresupuesto(gasto);
         if(!existe) {
-            throw new ExcepcionSinDatos(NO_ESISTE_PRESUPUESTO);
+            throw new ExcepcionSinDatos(NO_EXISTE_PRESUPUESTO);
         }
     }
 

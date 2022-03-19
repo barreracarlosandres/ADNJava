@@ -25,6 +25,12 @@ public interface RepositorioPresupuesto {
      * Permite validar si existe un presupuesto por id
      * @return si existe o no
      */
+    boolean existe(Long id);
+
+    /**
+     * Permite validar si existe un presupuesto por id
+     * @return si existe o no
+     */
     boolean existeUsuario(String identificacionUsuario);
 
     /**
