@@ -37,7 +37,7 @@ class ServicioActualizarUsuarioTest {
         BasePrueba.assertThrows(() -> servicioActualizarUsuario.ejecutar(usuario), ExcepcionSinDatos.class,"El usuario no existe en el sistema");
     }
 
-    @Test
+    /*@Test
     @DisplayName("No debería sin tamaño identificacionUsuario mayor al permitido")
     void NoDeberiaIngresarUsuarioConIdentificacionUsuarioMayorAlPermitido() {
 
@@ -49,5 +49,5 @@ class ServicioActualizarUsuarioTest {
         servicioActualizarUsuario.ejecutar(usuario);
         //assert
         Mockito.verify(repositorioUsuario,Mockito.times(1)).actualizar(usuario);
-    }
+    }*/
 }

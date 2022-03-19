@@ -23,10 +23,8 @@ public class Presupuesto {
     private static final int LONGITUD_MAXIMA_IDENTIFICACION_USUARIO = 15;
     private static final int LONGITUD_MAXIMA_VALOR_PRESUPUESTO = 7;
 
-    private static final String LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = String.format("identificacionUsuario no debe ser mayor a %s",
-                                    LONGITUD_MAXIMA_IDENTIFICACION_USUARIO);
-    private static final String EL_VALOR_PRESUPUESTO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = String.format("valorPresupuesto no debe ser mayor a %s",
-                                    LONGITUD_MAXIMA_VALOR_PRESUPUESTO);
+    private static final String LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "identificacionUsuario no debe ser mayor a 15";
+    private static final String EL_VALOR_PRESUPUESTO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "valorPresupuesto no debe ser mayor a 7";
 
     private static final String FORTAMATO_ALFANUMERICO = "[A-Za-z0-9]+";
     private static final String FORTAMATO_FECHA_PRESUPUESTO = "^(\\d{4})/[0-1][0-9]$";

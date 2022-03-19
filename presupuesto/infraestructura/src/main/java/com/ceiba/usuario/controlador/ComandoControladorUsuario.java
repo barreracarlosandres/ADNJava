@@ -41,10 +41,10 @@ public class ComandoControladorUsuario {
 		manejadorEliminarUsuario.ejecutar(id);
 	}
 
-	@PutMapping(value="/{id}")
+	@PutMapping(value="/{identificacionUsuario}")
 	@ApiOperation("Actualizar Usuario")
-	public void actualizar(@RequestBody ComandoUsuario comandoUsuario,@PathVariable Long id) {
-		comandoUsuario.setId(id);
+	public void actualizar(@RequestBody ComandoUsuario comandoUsuario,@PathVariable String identificacionUsuario) {
+		comandoUsuario.setIdentificacionUsuario(identificacionUsuario);
 		manejadorActualizarUsuario.ejecutar(comandoUsuario);
 	}
 }

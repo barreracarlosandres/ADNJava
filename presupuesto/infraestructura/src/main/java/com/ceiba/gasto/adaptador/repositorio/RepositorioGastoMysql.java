@@ -7,8 +7,6 @@ import com.ceiba.gasto.modelo.entidad.Gasto;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-
 @Repository
 public class RepositorioGastoMysql implements RepositorioGasto {
 
@@ -51,27 +49,21 @@ public class RepositorioGastoMysql implements RepositorioGasto {
 
     @Override
     public Long sumaGastosPorFechaGasto(Gasto gasto) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("identificacionUsuario", gasto.getIdentificacionUsuario());
-        paramSource.addValue("fechaGasto", gasto.getFechaGasto());
+        MapSqlParameterSource paramSource = getMapSqlParametros(gasto, "fechaGasto");
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlSumaGastoPorFecha,paramSource, Long.class);
     }
 
     @Override
     public Long presupuestoParaFechaGasto(Gasto gasto) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("identificacionUsuario", gasto.getIdentificacionUsuario());
-        paramSource.addValue("fechaPresupuesto", gasto.getFechaGasto());
+        MapSqlParameterSource paramSource = getMapSqlParametros(gasto, "fechaPresupuesto");
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlVarlorPresupuestoPorFecha,paramSource, Long.class);
     }
 
     @Override
     public boolean existePresupuesto(Gasto gasto) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("identificacionUsuario", gasto.getIdentificacionUsuario());
-        paramSource.addValue("fechaPresupuesto", gasto.getFechaGasto());
+        MapSqlParameterSource paramSource = getMapSqlParametros(gasto, "fechaPresupuesto");
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePresupuestoPorIdentificacionUsuarioYFechaPresupuesto,paramSource, Boolean.class);
     }
@@ -79,6 +71,13 @@ public class RepositorioGastoMysql implements RepositorioGasto {
     @Override
     public void actualizar(Gasto gasto) {
         this.customNamedParameterJdbcTemplate.actualizar(gasto, sqlActualizar);
+    }
+
+    private MapSqlParameterSource getMapSqlParametros(Gasto gasto, String fechaGasto) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("identificacionUsuario", gasto.getIdentificacionUsuario());
+        paramSource.addValue(fechaGasto, gasto.getFechaGasto());
+        return paramSource;
     }
 
 }

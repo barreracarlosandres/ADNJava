@@ -48,7 +48,6 @@ class ComandoControladorUsuarioTest {
     @DisplayName("Deberia actualizar nombre y apellido de un usuario por Id e IdentificacionUsuario")
     void deberiaActualizarUnUsuario() throws Exception{
         // arrange
-        //String identificacionUsuario = "94123123";
         ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder()
                 .conId(1L)
                 .conIdentificacionUsuario("94123123")
@@ -56,7 +55,7 @@ class ComandoControladorUsuarioTest {
                 .conApellido("Perez ")
                 .build();
         // act - assert
-        mocMvc.perform(put("/usuarios/{id}",usuario.getId())
+        mocMvc.perform(put("/usuarios/{identificacionUsuario}",usuario.getIdentificacionUsuario())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(usuario)))
                 .andExpect(status().isOk());
@@ -67,17 +66,17 @@ class ComandoControladorUsuarioTest {
     void NoDeriaActualizarUnUsuario() throws Exception{
         // arrange
         ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder()
-                .conId(1L)
                 .conIdentificacionUsuario("941231231")
                 .build();
         // act - assert
-        mocMvc.perform(put("/usuarios/{id}",usuario.getId())
+        mocMvc.perform(put("/usuarios/{identificacionUsuario}",usuario.getIdentificacionUsuario())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound())
+                .andExpect(content().json("{'mensaje': 'El usuario no existe en el sistema'}"));
     }
 
-   @Test
+    @Test
     @DisplayName("Deberia eliminar un usuario")
     void deberiaEliminarUnUsuario() throws Exception {
         // arrange

@@ -28,7 +28,7 @@ class UsuarioTest {
     }
 
     @Test
-    @DisplayName("No debería ingresar un usuario sin nombre")
+    @DisplayName("No debería crar un usuario sin nombre")
     void NoDeberiaCrearUsuarioSinNombre() {
 
         //Arrange

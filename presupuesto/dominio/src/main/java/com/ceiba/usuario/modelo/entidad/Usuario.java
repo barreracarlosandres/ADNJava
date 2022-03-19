@@ -22,10 +22,9 @@ public class Usuario {
     private static final int LONGITUD_MAXIMA_NOMBRE = 100;
     private static final int LONGITUD_MAXIMA_APELLIDO = 100;
 
-    private static final String LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = String.format("identificacionUsuario no debe ser mayor a %s",LONGITUD_MAXIMA_IDENTIFICACION_USUARIO);
-    private static final String EL_NOMBRE_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = String.format("el atributo nombre no debe ser mayor a %s",LONGITUD_MAXIMA_NOMBRE);
-    private static final String EL_APELLIDO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = String.format("el atributo apellido no debe ser mayor a %s",LONGITUD_MAXIMA_APELLIDO);
-
+    private static final String LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "identificacionUsuario no debe ser mayor a 15";
+    private static final String EL_NOMBRE_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "el atributo nombre no debe ser mayor a 100";
+    private static final String EL_APELLIDO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A = "el atributo apellido no debe ser mayor a 100";
 
     private static final String EL_FORMATO_NOMBRE_USUARIO = "El nombre puede incluir caracteres del alfabeto, espacio y acentos";
     private static final String EL_FORMATO_APELLIDO_USUARIO = "El apellido puede incluir caracteres del alfabeto, espacio y acentos";
