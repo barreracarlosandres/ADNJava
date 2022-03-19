@@ -22,7 +22,7 @@ class PresupuestoTest {
         Presupuesto presupuesto = new PresupuestoTestDataBuilder().conId(1L).build();
         //assert
         assertEquals(1, presupuesto.getId());
-        assertEquals("123", presupuesto.getIdentificacionUsuario());
+        assertEquals("94123123", presupuesto.getIdentificacionUsuario());
         assertEquals(123, presupuesto.getValorPresupuesto());
         assertEquals(presupuesto.getFechaPresupuesto(), presupuesto.getFechaPresupuesto());
     }

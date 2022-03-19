@@ -4,7 +4,6 @@ package com.ceiba.presupuesto.modelo.entidad;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static com.ceiba.dominio.ValidadorArgumento.*;
 
@@ -36,26 +35,26 @@ public class Presupuesto {
     private static final String EL_FORMATO_VALOR_PRESUPUESTO = "valorPresupuesto debe ser numérico";
     private static final String EL_FORTAMATO_FECHA_PRESUPUESTO = "fechaPresupuesto debe ser YYYY/MM";
 
-    public Presupuesto(Long id, String identificacionUsuario, Long valorPresupuesto, String fechaPresupuesto) {
+    public Presupuesto(Long id, String identificacionUsuario, Long valorPresupuesto, LocalDateTime fechaPresupuesto) {
 
-        validarObligatorio(identificacionUsuario, SE_DEBE_INGRESAR_IDENTIFICACION_USUARIO);
-        validarObligatorio(valorPresupuesto, SE_DEBE_INGRESAR_VALOR_PRESUPUESTO);
-        validarObligatorio(fechaPresupuesto, SE_DEBE_INGRESAR_FECHA_PRESUPUESTO);
-
-        validarRegex(identificacionUsuario,FORTAMATO_ALFANUMERICO, EL_FORMATO_IDENTIFICACION_USUARIO);
-        validarRegex(fechaPresupuesto,FORTAMATO_FECHA_PRESUPUESTO, EL_FORTAMATO_FECHA_PRESUPUESTO);
-
-
-        validarLongitudMaxima(identificacionUsuario, LONGITUD_MAXIMA_IDENTIFICACION_USUARIO, LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
-        validarLongitudMaxima(valorPresupuesto, LONGITUD_MAXIMA_VALOR_PRESUPUESTO, EL_VALOR_PRESUPUESTO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
+        validarRestriccionesDeParametrosEntrada(identificacionUsuario, valorPresupuesto, fechaPresupuesto);
 
         this.id = id;
         this.identificacionUsuario = identificacionUsuario;
         this.valorPresupuesto = valorPresupuesto;
-        this.fechaPresupuesto = getFechaDeString(fechaPresupuesto);
+        this.fechaPresupuesto = fechaPresupuesto;
     }
 
-    private static LocalDateTime getFechaDeString(String fechaPresupuesto) {
-        return LocalDateTime.parse(fechaPresupuesto + "/01 00:00", DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+    private void validarRestriccionesDeParametrosEntrada(String identificacionUsuario, Long valorPresupuesto, LocalDateTime fechaPresupuesto) {
+
+        validarObligatorio(fechaPresupuesto, SE_DEBE_INGRESAR_FECHA_PRESUPUESTO);
+        validarObligatorio(valorPresupuesto, SE_DEBE_INGRESAR_VALOR_PRESUPUESTO);
+        validarObligatorio(identificacionUsuario, SE_DEBE_INGRESAR_IDENTIFICACION_USUARIO);
+
+        validarRegex(identificacionUsuario,FORTAMATO_ALFANUMERICO, EL_FORMATO_IDENTIFICACION_USUARIO);
+
+        validarLongitudMaxima(identificacionUsuario, LONGITUD_MAXIMA_IDENTIFICACION_USUARIO, LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
+        validarLongitudMaxima(valorPresupuesto, LONGITUD_MAXIMA_VALOR_PRESUPUESTO, EL_VALOR_PRESUPUESTO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
     }
+
 }

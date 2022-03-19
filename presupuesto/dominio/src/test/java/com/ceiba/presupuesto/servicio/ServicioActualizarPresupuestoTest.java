@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.time.LocalDateTime;
+
 class ServicioActualizarPresupuestoTest {
 
     @Test
@@ -17,7 +19,9 @@ class ServicioActualizarPresupuestoTest {
         // arrange
         Presupuesto Presupuesto = new PresupuestoTestDataBuilder().conId(3L).build();
         RepositorioPresupuesto repositorioPresupuesto = Mockito.mock(RepositorioPresupuesto.class);
-        Mockito.when(repositorioPresupuesto.existe(Mockito.anyLong())).thenReturn(false);
+        Mockito.when(repositorioPresupuesto.existePresupuesto(
+                Mockito.anyString(),
+                Mockito.any(LocalDateTime.class))).thenReturn(false);
         ServicioActualizarPresupuesto servicioActualizarPresupuesto = new ServicioActualizarPresupuesto(repositorioPresupuesto);
         // act - assert
         BasePrueba.assertThrows(()
@@ -31,7 +35,10 @@ class ServicioActualizarPresupuestoTest {
         // arrange
         Presupuesto presupuesto = new PresupuestoTestDataBuilder().conId(1L).build();
         RepositorioPresupuesto repositorioPresupuesto = Mockito.mock(RepositorioPresupuesto.class);
-        Mockito.when(repositorioPresupuesto.existe(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(repositorioPresupuesto.existePresupuesto(
+                Mockito.anyString(),
+                Mockito.any(LocalDateTime.class)
+         )).thenReturn(true);
         ServicioActualizarPresupuesto servicioActualizarPresupuesto = new ServicioActualizarPresupuesto(repositorioPresupuesto);
         // act
         servicioActualizarPresupuesto.ejecutar(presupuesto);

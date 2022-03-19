@@ -48,7 +48,7 @@ class ComandoControladorGastTest {
     @DisplayName("No deberia ingresar un gasto por mal formato valorGasto")
     void NoDeberiaIngresarGastoPorMalFormatoValorGasto() throws Exception{
         // arrange
-        ComandoGasto gasto = new ComandoGastoTestDataBuilder().build();
+        ComandoPresupuesto gasto = new ComandoPresupuestoTestDataBuilder().build();
         // act - assert
         mocMvc.perform(post("/gastos")
                         .contentType(MediaType.APPLICATION_JSON)

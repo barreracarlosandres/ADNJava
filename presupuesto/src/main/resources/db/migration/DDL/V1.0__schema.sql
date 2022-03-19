@@ -7,11 +7,18 @@ create table usuario (
  UNIQUE KEY identificacion_usuario_usuario (identificacion_usuario)
 );
 
+create table presupuesto (
+ id int(11) not null auto_increment,
+ identificacion_usuario varchar(15) not null,
+ valor_presupuesto int not null,
+ fecha_presupuesto datetime not null,
+ primary key (id)
+);
+
 create table gasto (
  id int(11) not null auto_increment,
  identificacion_usuario varchar(15) not null,
  valor_gasto int not null,
  fecha_gasto datetime not null,
- primary key (id),
- UNIQUE KEY identificacion_usuario_gasto (identificacion_usuario)
+ primary key (id)
 );

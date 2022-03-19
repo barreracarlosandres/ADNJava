@@ -15,13 +15,15 @@ public class ServicioActualizarPresupuesto {
     }
 
     public void ejecutar(Presupuesto presupuesto) {
-        validarExistenciaPrevia(presupuesto);
+        validarExistenciaPreviaPresupuesto(presupuesto);
         this.repositorioPresupuesto.actualizar(presupuesto);
     }
 
-    private void validarExistenciaPrevia(Presupuesto presupuesto) {
-        boolean existe = this.repositorioPresupuesto.existe(presupuesto.getId());
-        if(!existe) {
+    private void validarExistenciaPreviaPresupuesto(Presupuesto presupuesto) {
+        boolean existe = this.repositorioPresupuesto.existePresupuesto(
+                presupuesto.getIdentificacionUsuario(),
+                presupuesto.getFechaPresupuesto());
+        if(existe) {
             throw new ExcepcionSinDatos(EL_PRESUPUESTO_NO_EXISTE_EN_EL_SISTEMA);
         }
     }

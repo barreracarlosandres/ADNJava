@@ -4,6 +4,10 @@ import com.ceiba.gasto.puerto.repositorio.RepositorioGasto;
 import com.ceiba.gasto.servicio.ServicioActualizarGasto;
 import com.ceiba.gasto.servicio.ServicioCrearGasto;
 import com.ceiba.gasto.servicio.ServicioEliminarGasto;
+import com.ceiba.presupuesto.puerto.repositorio.RepositorioPresupuesto;
+import com.ceiba.presupuesto.servicio.ServicioActualizarPresupuesto;
+import com.ceiba.presupuesto.servicio.ServicioCrearPresupuesto;
+import com.ceiba.presupuesto.servicio.ServicioEliminarPresupuesto;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import com.ceiba.usuario.servicio.ServicioActualizarUsuario;
 import com.ceiba.usuario.servicio.ServicioCrearUsuario;
@@ -42,6 +46,21 @@ public class BeanServicio {
     @Bean
     public ServicioActualizarGasto servicioActualizarGasto(RepositorioGasto repositorioGasto) {
         return new ServicioActualizarGasto(repositorioGasto);
+    }
+
+    @Bean
+    public ServicioCrearPresupuesto servicioCrearPresupuesto(RepositorioPresupuesto repositorioPresupuesto) {
+        return new ServicioCrearPresupuesto(repositorioPresupuesto);
+    }
+
+    @Bean
+    public ServicioEliminarPresupuesto servicioEliminarPresupuesto(RepositorioPresupuesto repositorioPresupuesto) {
+        return new ServicioEliminarPresupuesto(repositorioPresupuesto);
+    }
+
+    @Bean
+    public ServicioActualizarPresupuesto servicioActualizarPresupuesto(RepositorioPresupuesto repositorioPresupuesto) {
+        return new ServicioActualizarPresupuesto(repositorioPresupuesto);
     }
 	
 

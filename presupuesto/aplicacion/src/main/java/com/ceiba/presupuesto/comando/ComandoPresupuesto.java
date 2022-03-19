@@ -1,13 +1,18 @@
-package com.ceiba.presupuesto.modelo.dto;
+package com.ceiba.presupuesto.comando;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @AllArgsConstructor
-public class DtoPresupuesto {
+@NoArgsConstructor
+public class ComandoPresupuesto {
+
     private Long id;
     private String identificacionUsuario;
     private Long valorPresupuesto;

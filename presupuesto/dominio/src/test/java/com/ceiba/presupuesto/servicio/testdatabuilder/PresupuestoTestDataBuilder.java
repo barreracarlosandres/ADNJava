@@ -10,24 +10,19 @@ public class PresupuestoTestDataBuilder {
     private Long id;
     private String identificacionUsuario;
     private Long valorPresupuesto;
-    private String fechaPresupuesto;
+    private LocalDateTime fechaPresupuesto;
 
     public PresupuestoTestDataBuilder() {
-        identificacionUsuario = "123";
+        identificacionUsuario = "94123123";
         valorPresupuesto = 123L;
-        fechaPresupuesto = getFechaConFormato();
-    }
-
-    private static String getFechaConFormato() {
-        return LocalDateTime
-                .now()
-                .format(DateTimeFormatter.ofPattern("yyyy/MM"));
+        fechaPresupuesto = LocalDateTime.now();
     }
 
     public PresupuestoTestDataBuilder conId(Long id) {
         this.id = id;
         return this;
     }
+
     public PresupuestoTestDataBuilder conIdentificacionUsuario(String identificacionUsuario) {
         this.identificacionUsuario = identificacionUsuario;
         return this;
@@ -38,7 +33,7 @@ public class PresupuestoTestDataBuilder {
         return this;
     }
 
-    public PresupuestoTestDataBuilder conFechaPresupuesto(String fechaPresupuesto) {
+    public PresupuestoTestDataBuilder conFechaPresupuesto(LocalDateTime fechaPresupuesto) {
         this.fechaPresupuesto = fechaPresupuesto;
         return this;
     }
