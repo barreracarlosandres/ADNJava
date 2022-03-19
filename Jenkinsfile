@@ -78,7 +78,6 @@ pipeline{
                 }
             }
         }
-
 		
 		stage('Static Code Analysis')
 		{
