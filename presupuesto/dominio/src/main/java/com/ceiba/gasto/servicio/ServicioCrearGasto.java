@@ -1,13 +1,15 @@
 package com.ceiba.gasto.servicio;
 
-import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.gasto.modelo.entidad.Gasto;
 import com.ceiba.gasto.puerto.repositorio.RepositorioGasto;
 
 
 public class ServicioCrearGasto {
 
-    private static final String EL_GASTO_YA_EXISTE_EN_EL_SISTEMA = "El gasto ya existe en el sistema";
+    private static final String NO_ESISTE_PRESUPUESTO = "No existe un presupuesto para aplicar el gasto";
+    private static final String SE_SUPERO_EL_PRESUPUESTO = "Se superó el valor del presupuesto";
 
     private final RepositorioGasto repositorioGasto;
 
@@ -16,14 +18,32 @@ public class ServicioCrearGasto {
     }
 
     public Long ejecutar(Gasto gasto) {
-        validarExistenciaPrevia(gasto);
+        validarExistenciaDePresupuesto(gasto);
+        validarPresupuestoDisponible(gasto);
         return this.repositorioGasto.crear(gasto);
     }
 
-    private void validarExistenciaPrevia(Gasto gasto) {
-        boolean existe = this.repositorioGasto.existe(gasto.getId());
-        if(existe) {
-            throw new ExcepcionDuplicidad(EL_GASTO_YA_EXISTE_EN_EL_SISTEMA);
+    private void validarExistenciaDePresupuesto(Gasto gasto) {
+        boolean existe = this.repositorioGasto.existePresupuesto(gasto);
+        if(!existe) {
+            throw new ExcepcionSinDatos(NO_ESISTE_PRESUPUESTO);
         }
+    }
+
+    private void validarPresupuestoDisponible(Gasto gasto){
+        Long temporal = sumaGastosPorFechaGasto(gasto)+gasto.getValorGasto();
+        if( temporal.compareTo(presupuestoDelMes(gasto)) > 0 )
+        {
+            throw new ExcepcionValorInvalido(SE_SUPERO_EL_PRESUPUESTO);
+        }
+    }
+
+    private Long sumaGastosPorFechaGasto(Gasto gasto) {
+        return this.repositorioGasto.sumaGastosPorFechaGasto(gasto);
+    }
+
+    private Long presupuestoDelMes(Gasto gasto) {
+        return this.repositorioGasto.presupuestoParaFechaGasto(gasto);
+
     }
 }

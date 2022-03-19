@@ -7,6 +7,8 @@ import com.ceiba.gasto.modelo.entidad.Gasto;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+
 @Repository
 public class RepositorioGastoMysql implements RepositorioGasto {
 
@@ -21,8 +23,14 @@ public class RepositorioGastoMysql implements RepositorioGasto {
     @SqlStatement(namespace="gasto", value="eliminar")
     private static String sqlEliminar;
 
-    @SqlStatement(namespace="gasto", value="existe")
-    private static String sqlExiste;
+    @SqlStatement(namespace="gasto", value="sumaGastoPorFecha")
+    private static String sqlSumaGastoPorFecha;
+
+    @SqlStatement(namespace="presupuesto", value="existePorIdentificacionUsuarioYPorFechaPresupuesto")
+    private static String sqlExistePresupuestoPorIdentificacionUsuarioYFechaPresupuesto;
+
+    @SqlStatement(namespace="presupuesto", value="valorPresupuestoPorFecha")
+    private static String sqlVarlorPresupuestoPorFecha;
 
     public RepositorioGastoMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -42,11 +50,30 @@ public class RepositorioGastoMysql implements RepositorioGasto {
     }
 
     @Override
-    public boolean existe(Long id) {
+    public Long sumaGastosPorFechaGasto(Gasto gasto) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", id);
+        paramSource.addValue("identificacionUsuario", gasto.getIdentificacionUsuario());
+        paramSource.addValue("fechaGasto", gasto.getFechaGasto());
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlSumaGastoPorFecha,paramSource, Long.class);
+    }
+
+    @Override
+    public Long presupuestoParaFechaGasto(Gasto gasto) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("identificacionUsuario", gasto.getIdentificacionUsuario());
+        paramSource.addValue("fechaPresupuesto", gasto.getFechaGasto());
+
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlVarlorPresupuestoPorFecha,paramSource, Long.class);
+    }
+
+    @Override
+    public boolean existePresupuesto(Gasto gasto) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("identificacionUsuario", gasto.getIdentificacionUsuario());
+        paramSource.addValue("fechaPresupuesto", gasto.getFechaGasto());
+
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePresupuestoPorIdentificacionUsuarioYFechaPresupuesto,paramSource, Boolean.class);
     }
 
     @Override

@@ -15,6 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -35,7 +38,11 @@ class ComandoControladorGastTest {
     @DisplayName("Deberia ingresar un gasto")
     void deberiaIngresarUnGasto() throws Exception{
         // arrange
-        ComandoGasto gasto = new ComandoGastoTestDataBuilder().build();
+        ComandoGasto gasto = new ComandoGastoTestDataBuilder()
+                .conFechaGasto(getFechaBaseExistente())
+                .conIdentificacionUsuario(getIdentifacionUsuarioExistente())
+                .conValorGasto(1L)
+                .build();
         // act - assert
         mocMvc.perform(post("/gastos")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -44,28 +51,46 @@ class ComandoControladorGastTest {
                 .andExpect(content().json("{'valor': 2}"));
     }
 
-    /*@Test
-    @DisplayName("No deberia ingresar un gasto por mal formato valorGasto")
-    void NoDeberiaIngresarGastoPorMalFormatoValorGasto() throws Exception{
+    @Test
+    @DisplayName("No deberia ingresar un gasto por presupusto no existente")
+    void NoDeberiaCrearGastoPorPresupuestoNoExistente() throws Exception{
         // arrange
-        ComandoPresupuesto gasto = new ComandoPresupuestoTestDataBuilder().build();
+        ComandoGasto gasto = new ComandoGastoTestDataBuilder()
+                .build();
         // act - assert
         mocMvc.perform(post("/gastos")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("identificacionUsuario", gasto.getIdentificacionUsuario())
-                        .param("valorGasto", "123")
-                        .param("fechaGasto", "2020-01-01 12:00:00"))
-                .andExpect(content().contentType("application/json"))
+                        .content(objectMapper.writeValueAsString(gasto)))
+                .andExpect(status().isNotFound())
+                .andExpect(content().json("{'mensaje': 'No existe un presupuesto para aplicar el gasto'}"));
+    }
+
+    @Test
+    @DisplayName("No deberia ingresar un gasto por presupusto no existente")
+    void NoDeberiaCrearGastoPorSuperarElPresupuesto() throws Exception{
+        // arrange
+        ComandoGasto gasto = new ComandoGastoTestDataBuilder()
+                .conFechaGasto(getFechaBaseExistente())
+                .conIdentificacionUsuario(getIdentifacionUsuarioExistente())
+                .conValorGasto(getValorGastoMayorAlPresupuesto())
+                .build();
+        // act - assert
+        mocMvc.perform(post("/gastos")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(gasto)))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().json("{'valor': 2}"));
-    }*/
+                .andExpect(content().json("{'mensaje': 'Se superó el valor del presupuesto'}"));
+    }
 
     @Test
     @DisplayName("Deberia actualizar un gasto")
     void deberiaActualizarUnGasto() throws Exception{
         // arrange
         Long id = 1L;
-        ComandoGasto gasto = new ComandoGastoTestDataBuilder().build();
+        ComandoGasto gasto = new ComandoGastoTestDataBuilder()
+                .conIdentificacionUsuario(getIdentifacionUsuarioExistente())
+                .conFechaGasto(getFechaBaseExistente())
+                .build();
         // act - assert
         mocMvc.perform(put("/gastos/{id}",id)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -88,6 +113,26 @@ class ComandoControladorGastTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
+    }
+
+    private static LocalDateTime getFechaBaseExistente() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime fechaPresupuesto = LocalDateTime.parse("2022-03-08 17:00:00", formatter);
+        return fechaPresupuesto;
+    }
+
+    private static LocalDateTime getFechaBaseNoExistente() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime fechaPresupuesto = LocalDateTime.parse("1500-01-01 00:00:00", formatter);
+        return fechaPresupuesto;
+    }
+
+    private static String getIdentifacionUsuarioExistente() {
+        return "94123123";
+    }
+
+    private long getValorGastoMayorAlPresupuesto() {
+        return 9999999L;
     }
 
 }

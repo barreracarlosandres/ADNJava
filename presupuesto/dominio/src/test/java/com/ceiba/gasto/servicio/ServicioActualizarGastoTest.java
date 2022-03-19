@@ -17,7 +17,7 @@ class ServicioActualizarGastoTest {
         // arrange
         Gasto gasto = new GastoTestDataBuilder().conId(3L).build();
         RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
-        Mockito.when(repositorioGasto.existe(Mockito.anyLong())).thenReturn(false);
+        Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(false);
         ServicioActualizarGasto servicioActualizarGasto = new ServicioActualizarGasto(repositorioGasto);
         // act - assert
         BasePrueba.assertThrows(()
@@ -31,7 +31,7 @@ class ServicioActualizarGastoTest {
         // arrange
         Gasto gasto = new GastoTestDataBuilder().conId(1L).build();
         RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
-        Mockito.when(repositorioGasto.existe(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(true);
         ServicioActualizarGasto servicioActualizarGasto = new ServicioActualizarGasto(repositorioGasto);
         // act
         servicioActualizarGasto.ejecutar(gasto);

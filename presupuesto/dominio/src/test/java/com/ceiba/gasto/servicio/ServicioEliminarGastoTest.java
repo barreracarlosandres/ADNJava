@@ -13,9 +13,9 @@ class ServicioEliminarGastoTest {
         RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
         ServicioEliminarGasto servicioEliminarGasto = new ServicioEliminarGasto(repositorioGasto);
 
-        servicioEliminarGasto.ejecutar(1l);
+        servicioEliminarGasto.ejecutar(1L);
 
-        Mockito.verify(repositorioGasto, Mockito.times(1)).eliminar(1l);
+        Mockito.verify(repositorioGasto, Mockito.times(1)).eliminar(1L);
 
     }
 

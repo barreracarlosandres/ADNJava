@@ -1,6 +1,7 @@
 package com.ceiba.gasto.servicio.testdatabuilder;
 
 import com.ceiba.gasto.comando.ComandoGasto;
+import com.ceiba.presupuesto.testdatabuilder.ComandoPresupuestoTestDataBuilder;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,21 @@ public class ComandoGastoTestDataBuilder {
         identificacionUsuario = RandomStringUtils.randomAlphabetic(15);
         valorGasto =  Long.parseLong(RandomStringUtils.randomNumeric(7));
         fechaGasto = LocalDateTime.now();
+    }
+
+    public ComandoGastoTestDataBuilder conIdentificacionUsuario(String identificacionUsuario){
+        this.identificacionUsuario=identificacionUsuario;
+        return this;
+    }
+
+    public ComandoGastoTestDataBuilder conFechaGasto(LocalDateTime fechaGasto) {
+        this.fechaGasto = fechaGasto;
+        return this;
+    }
+
+    public ComandoGastoTestDataBuilder conValorGasto(Long valorGasto) {
+        this.valorGasto = valorGasto;
+        return this;
     }
 
     public ComandoGasto build() {

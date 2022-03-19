@@ -35,6 +35,7 @@ class ServicioCrearPresupuestoTest {
         //Arrange
         PresupuestoTestDataBuilder PresupuestoTestDataBuilder = new PresupuestoTestDataBuilder()
                 .conValorPresupuesto(getRandomNumeroDeTamanno8());
+
         //act-assert
         BasePrueba.assertThrows(() -> {
                     PresupuestoTestDataBuilder.build();
@@ -57,7 +58,7 @@ class ServicioCrearPresupuestoTest {
     }
 
     private static long getRandomNumeroDeTamanno8() {
-        return Long.parseLong(RandomStringUtils.randomNumeric(8));
+        return 999999999L;
     }
 
     private static  String getRandomStringAlfabetoDeTamanno16() {

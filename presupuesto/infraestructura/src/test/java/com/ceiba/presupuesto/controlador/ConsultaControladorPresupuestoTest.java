@@ -41,7 +41,7 @@ class ConsultaControladorPresupuestoTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].identificacionUsuario", is("123")))
+                .andExpect(jsonPath("$[0].identificacionUsuario", is("94123123")))
                 .andExpect(jsonPath("$[0].valorPresupuesto", is(500)))
                 .andExpect(jsonPath("$[0].fechaPresupuesto", is("2022-03-08 17:00:00")))
                 .andExpect(jsonPath("$[0].id", is(1)));

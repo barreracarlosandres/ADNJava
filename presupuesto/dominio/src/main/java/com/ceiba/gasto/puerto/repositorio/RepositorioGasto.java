@@ -24,9 +24,16 @@ public interface RepositorioGasto {
 
     /**
      * Permite validar si existe un usuario con un nombre
-     * @param id
      * @return si existe o no
      */
-    boolean existe(Long id);
+    boolean existePresupuesto(Gasto gasto);
+
+    /**
+     * Permite sumar los gastos ejecutados
+     * @return la suma de los gastos ejecutados para el año y mes
+     */
+    Long sumaGastosPorFechaGasto(Gasto gasto);
+
+    Long presupuestoParaFechaGasto(Gasto gasto);
 
 }

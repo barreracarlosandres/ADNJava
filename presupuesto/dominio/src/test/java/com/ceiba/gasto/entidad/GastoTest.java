@@ -15,47 +15,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GastoTest {
 
     @Test
-    @DisplayName("Deberia ingresar un gasto")
-    void deberiaCrearCorrectamenteElGasto() {
-        // arrange
-        //act
-        Gasto gasto = new GastoTestDataBuilder().conId(1L).build();
-        //assert
-        assertEquals(1, gasto.getId());
-        assertEquals("123", gasto.getIdentificacionUsuario());
-        assertEquals(123, gasto.getValorGasto());
-        assertEquals(gasto.getFechaGasto(), gasto.getFechaGasto());
-    }
-
-    @Test
     @DisplayName("No debería ingresar sin identificacionUsuario")
-    void deberiaFallarSinIdentificacionUsuario() {
+    void NodeberiaCrearGastoSinIdentificacionUsuario() {
 
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder().conIdentificacionUsuario(null).conId(1L);
         //act-assert
-        BasePrueba.assertThrows(() -> {
-                    gastoTestDataBuilder.build();
-                },
+        BasePrueba.assertThrows(() -> { gastoTestDataBuilder.build(); },
                 ExcepcionValorObligatorio.class, "Debe ingresar identificacionUsuario");
     }
 
     @Test
     @DisplayName("No debería ingresar sin valorGasto")
-    void deberiaFallarSinVarlorGasto() {
+    void NodeberiaCrearGastoSinVarlorGasto() {
 
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder().conValorGasto(null).conId(1L);
         //act-assert
-        BasePrueba.assertThrows(() -> {
-                    gastoTestDataBuilder.build();
-                },
+        BasePrueba.assertThrows(() -> { gastoTestDataBuilder.build(); },
                 ExcepcionValorObligatorio.class, "Debe ingresar valorGasto");
     }
 
     @Test
     @DisplayName("No debería ingresar sin fechaGasto")
-    void deberiaFallarSinFechaGasto() {
+    void NodeberiaCrearGastoSinFechaGasto() {
 
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder().conFechaGasto(null).conId(1L);
@@ -68,7 +51,7 @@ class GastoTest {
 
     @Test
     @DisplayName("No debería ingresar identificacionUsuario sin tamaño permitido")
-    void deberiaFallarSinIdentificacionMayorTamanioPermitido() {
+    void NodeberiaCrearGastoConIdentificacionUsuarioMayorTamanioPermitido() {
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder()
                 .conIdentificacionUsuario(RandomStringUtils.randomAlphabetic(16)).conId(1L);
@@ -81,7 +64,7 @@ class GastoTest {
 
     @Test
     @DisplayName("No debería ingresar valorGasto sin tamaño permitido")
-    void deberiaFallarSinValorGastoMayorTamanioPermitido() {
+    void NodeberiaCrearGastoConValorGastoMayorTamanioPermitido() {
 
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder()
@@ -95,7 +78,7 @@ class GastoTest {
 
     @Test
     @DisplayName("No debería ingresar identificacionUsuario sin formato alfanumérico ")
-    void deberiaFallarSinIdentificacionUsuarioAlafanumerico() {
+    void NodeberiaCrearGastoSinIdentificacionUsuarioAlafanumerico() {
 
         //Arrange
         GastoTestDataBuilder gastoTestDataBuilder = new GastoTestDataBuilder()

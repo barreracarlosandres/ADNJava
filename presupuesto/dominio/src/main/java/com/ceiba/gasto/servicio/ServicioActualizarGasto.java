@@ -20,7 +20,7 @@ public class ServicioActualizarGasto {
     }
 
     private void validarExistenciaPrevia(Gasto gasto) {
-        boolean existe = this.repositorioGasto.existe(gasto.getId());
+        boolean existe = this.repositorioGasto.existePresupuesto(gasto);
         if(!existe) {
             throw new ExcepcionSinDatos(EL_GASTO_NO_EXISTE_EN_EL_SISTEMA);
         }

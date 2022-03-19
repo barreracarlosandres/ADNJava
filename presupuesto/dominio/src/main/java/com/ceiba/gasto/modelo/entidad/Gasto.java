@@ -28,7 +28,6 @@ public class Gasto {
                                     LONGITUD_MAXIMA_VALOR_GASTO);
 
     private static final String EL_FORMATO_IDENTIFICACION_USUARIO = "La identificacionUsuario debe ser alfanumérico";
-    private static final String EL_FORMATO_VALOR_GASTO = "valorGasto debe ser numérico";
     private static final String FORTAMO_ALFANUMERICO = "[A-Za-z0-9]+";
 
     public Gasto(Long id, String identificacionUsuario, Long valorGasto, LocalDateTime fechaGasto) {
@@ -41,8 +40,6 @@ public class Gasto {
 
         validarLongitudMaxima(identificacionUsuario, LONGITUD_MAXIMA_IDENTIFICACION_USUARIO, LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
         validarLongitudMaxima(valorGasto, LONGITUD_MAXIMA_VALOR_GASTO, EL_VALOR_GASTO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
-
-
 
         this.id = id;
         this.identificacionUsuario = identificacionUsuario;
