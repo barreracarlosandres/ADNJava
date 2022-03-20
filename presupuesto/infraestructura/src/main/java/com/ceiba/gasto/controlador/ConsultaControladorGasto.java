@@ -26,5 +26,4 @@ public class ConsultaControladorGasto {
     public List<DtoGasto> listar() {
         return this.manejadorListarGasto.ejecutar();
     }
-
 }

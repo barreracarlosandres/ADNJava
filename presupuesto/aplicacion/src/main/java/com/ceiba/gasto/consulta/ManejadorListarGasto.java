@@ -17,4 +17,5 @@ public class ManejadorListarGasto {
     }
 
     public List<DtoGasto> ejecutar(){ return this.daoGasto.listar(); }
+
 }

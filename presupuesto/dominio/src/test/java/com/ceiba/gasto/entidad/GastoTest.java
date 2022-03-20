@@ -18,19 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GastoTest {
 
     @Test
-    void deberiaCrearCorrectamenteElGasto() {
-        // arrange
-        //act
-        Gasto gasto = new GastoTestDataBuilder().conId(1L).build();
-        //assert
-        assertEquals(1, gasto.getId());
-        assertEquals("94123123", gasto.getIdentificacionUsuario());
-        assertEquals(100L, gasto.getValorGasto());
-        assertEquals(gasto.getFechaGasto(), gasto.getFechaGasto());
-
-    }
-
-    @Test
     @DisplayName("No debería ingresar sin identificacionUsuario")
     void NodeberiaCrearGastoSinIdentificacionUsuario() {
 

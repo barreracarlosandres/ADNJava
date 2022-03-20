@@ -14,7 +14,25 @@ import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 class ServicioCrearGastoTest {
+
+    @Test
+    @DisplayName("Deberia Crear el gasto de manera correcta")
+    void deberiaCrearElUsuarioDeManeraCorrecta() {
+        // arrange
+        Gasto gasto = new GastoTestDataBuilder().build();
+        RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
+        Mockito.when(repositorioGasto.presupuestoParaFechaGasto(Mockito.any(Gasto.class))).thenReturn(90000L);
+        Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(true);
+        Mockito.when(repositorioGasto.crear(gasto)).thenReturn(10L);
+        ServicioCrearGasto servicioCrearGasto = new ServicioCrearGasto(repositorioGasto);
+        // act
+        Long idGasto = servicioCrearGasto.ejecutar(gasto);
+        //- assert
+        assertEquals(10L,idGasto);
+        Mockito.verify(repositorioGasto, Mockito.times(1)).crear(gasto);
+    }
 
     @Test
     @DisplayName("no deberia crear gasto por superar presupuesto")

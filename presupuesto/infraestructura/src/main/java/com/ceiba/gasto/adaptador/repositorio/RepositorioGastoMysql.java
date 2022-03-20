@@ -66,14 +66,14 @@ public class RepositorioGastoMysql implements RepositorioGasto {
     public Long sumaGastosPorFechaGasto(Gasto gasto) {
         MapSqlParameterSource paramSource = getMapSqlParametros(gasto, "fechaGasto");
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlSumaGastoPorFecha,paramSource, Long.class);
+        return  aseguraQueSeRetorneUnValor(sqlSumaGastoPorFecha, paramSource);
     }
 
     @Override
     public Long presupuestoParaFechaGasto(Gasto gasto) {
         MapSqlParameterSource paramSource = getMapSqlParametros(gasto, "fechaPresupuesto");
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlVarlorPresupuestoPorFecha,paramSource, Long.class);
+        return aseguraQueSeRetorneUnValor(sqlVarlorPresupuestoPorFecha, paramSource);
     }
 
     @Override
@@ -95,5 +95,16 @@ public class RepositorioGastoMysql implements RepositorioGasto {
         return paramSource;
     }
 
+    private Long aseguraQueSeRetorneUnValor(String sqlConsulta, MapSqlParameterSource paramSource) {
+
+        try {
+            return this.customNamedParameterJdbcTemplate
+                    .getNamedParameterJdbcTemplate()
+                    .queryForObject(sqlConsulta, paramSource, Long.class);
+        }
+        catch (org.springframework.dao.DataAccessException e) {
+            return 0L;
+        }
+    }
 }
 
