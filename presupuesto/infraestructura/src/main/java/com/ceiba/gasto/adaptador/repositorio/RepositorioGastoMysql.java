@@ -97,14 +97,18 @@ public class RepositorioGastoMysql implements RepositorioGasto {
 
     private Long aseguraQueSeRetorneUnValor(String sqlConsulta, MapSqlParameterSource paramSource) {
 
+
+        Long londSalida = 0L;
         try {
-            return this.customNamedParameterJdbcTemplate
+            londSalida = this.customNamedParameterJdbcTemplate
                     .getNamedParameterJdbcTemplate()
                     .queryForObject(sqlConsulta, paramSource, Long.class);
         }
-        catch (org.springframework.dao.DataAccessException e) {
-            return 0L;
+        catch (NullPointerException e) {
+            londSalida = 0L;
         }
+        return londSalida;
     }
+
 }
 
