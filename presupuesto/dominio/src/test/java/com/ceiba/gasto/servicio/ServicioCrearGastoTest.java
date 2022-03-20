@@ -70,6 +70,24 @@ class ServicioCrearGastoTest {
     }
 
     @Test
+    @DisplayName("no deberia crear gasto por superar presupuesto")
+    void NoberiaCrearGastoPorSuperarPresupuestoAlSerCero() {
+        Gasto gasto = new GastoTestDataBuilder()
+                .conValorGasto(1L)
+                .conValorGasto(9999999L)
+                .build();
+        RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
+        Mockito.when(repositorioGasto.presupuestoParaFechaGasto(Mockito.any(Gasto.class))).thenReturn(0L);
+        Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(true);
+        Mockito.when(repositorioGasto.crear(gasto)).thenReturn(10L);
+        ServicioCrearGasto servicioCrearGasto = new ServicioCrearGasto(repositorioGasto);
+        // act - assert
+        BasePrueba.assertThrows(()
+                        -> servicioCrearGasto.ejecutar(gasto)
+                , ExcepcionValorInvalido.class,"Se superó el valor del presupuesto");
+    }
+
+    @Test
     @DisplayName("No deberia crear gasto por superar presupuesto")
     void NoDeberiaCrearGastoPorNoExistirPresupuesto() {
         // arrange
