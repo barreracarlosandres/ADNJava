@@ -19,10 +19,28 @@ class ServicioCrearGastoTest {
 
     @Test
     @DisplayName("Deberia Crear el gasto de manera correcta")
-    void deberiaCrearElUsuarioDeManeraCorrecta() {
+    void deberiaCrearElGastoDeManeraCorrecta() {
         // arrange
         Gasto gasto = new GastoTestDataBuilder().build();
         RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
+        Mockito.when(repositorioGasto.presupuestoParaFechaGasto(Mockito.any(Gasto.class))).thenReturn(90000L);
+        Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(true);
+        Mockito.when(repositorioGasto.crear(gasto)).thenReturn(10L);
+        ServicioCrearGasto servicioCrearGasto = new ServicioCrearGasto(repositorioGasto);
+        // act
+        Long idGasto = servicioCrearGasto.ejecutar(gasto);
+        //- assert
+        assertEquals(10L,idGasto);
+        Mockito.verify(repositorioGasto, Mockito.times(1)).crear(gasto);
+    }
+
+    @Test
+    @DisplayName("Deberia Crear el gasto sin ingreso previo de un gasto")
+    void deberiaCrearElGastoSinGastosPreviosIngresados() {
+        // arrange
+        Gasto gasto = new GastoTestDataBuilder().build();
+        RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
+        Mockito.when(repositorioGasto.sumaGastosPorFechaGasto(Mockito.any(Gasto.class))).thenReturn(0L);
         Mockito.when(repositorioGasto.presupuestoParaFechaGasto(Mockito.any(Gasto.class))).thenReturn(90000L);
         Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(true);
         Mockito.when(repositorioGasto.crear(gasto)).thenReturn(10L);

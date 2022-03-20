@@ -103,7 +103,8 @@ public class RepositorioGastoMysql implements RepositorioGasto {
                     .getNamedParameterJdbcTemplate()
                     .queryForObject(sqlConsulta, paramSource, Long.class);
 
-        if(Objects.isNull(londSalida)) londSalida = 0L;
+        if(Objects.isNull(londSalida))
+        { londSalida = 0L; }
 
         return  londSalida;
     }
