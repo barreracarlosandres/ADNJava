@@ -35,12 +35,12 @@ class ServicioCrearGastoTest {
     }
 
     @Test
-    @DisplayName("Deberia Crear el gasto sin ingreso previo de un gasto")
+    @DisplayName("Deberia Crear el gasto sin datos previos en gastos")
     void deberiaCrearElGastoSinGastosPreviosIngresados() {
         // arrange
         Gasto gasto = new GastoTestDataBuilder().build();
         RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
-        Mockito.when(repositorioGasto.sumaGastosPorFechaGasto(Mockito.any(Gasto.class))).thenReturn(0L);
+        Mockito.when(repositorioGasto.existe(Mockito.anyLong())).thenReturn(false);
         Mockito.when(repositorioGasto.presupuestoParaFechaGasto(Mockito.any(Gasto.class))).thenReturn(90000L);
         Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(true);
         Mockito.when(repositorioGasto.crear(gasto)).thenReturn(10L);
@@ -60,24 +60,6 @@ class ServicioCrearGastoTest {
                 .conValorGasto(9999999L)
                 .build();
         RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
-        Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(true);
-        Mockito.when(repositorioGasto.crear(gasto)).thenReturn(10L);
-        ServicioCrearGasto servicioCrearGasto = new ServicioCrearGasto(repositorioGasto);
-        // act - assert
-        BasePrueba.assertThrows(()
-                        -> servicioCrearGasto.ejecutar(gasto)
-                , ExcepcionValorInvalido.class,"Se superó el valor del presupuesto");
-    }
-
-    @Test
-    @DisplayName("no deberia crear gasto por superar presupuesto")
-    void NoberiaCrearGastoPorSuperarPresupuestoAlSerCero() {
-        Gasto gasto = new GastoTestDataBuilder()
-                .conValorGasto(1L)
-                .conValorGasto(9999999L)
-                .build();
-        RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
-        Mockito.when(repositorioGasto.presupuestoParaFechaGasto(Mockito.any(Gasto.class))).thenReturn(0L);
         Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(true);
         Mockito.when(repositorioGasto.crear(gasto)).thenReturn(10L);
         ServicioCrearGasto servicioCrearGasto = new ServicioCrearGasto(repositorioGasto);
