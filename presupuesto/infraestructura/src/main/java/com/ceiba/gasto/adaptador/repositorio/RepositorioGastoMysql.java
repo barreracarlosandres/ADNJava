@@ -7,6 +7,8 @@ import com.ceiba.gasto.modelo.entidad.Gasto;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import java.util.Objects;
+
 @Repository
 public class RepositorioGastoMysql implements RepositorioGasto {
 
@@ -97,17 +99,13 @@ public class RepositorioGastoMysql implements RepositorioGasto {
 
     private Long aseguraQueSeRetorneUnValor(String sqlConsulta, MapSqlParameterSource paramSource) {
 
-
-        Long londSalida = 0L;
-        try {
-            londSalida = this.customNamedParameterJdbcTemplate
+        Long londSalida = this.customNamedParameterJdbcTemplate
                     .getNamedParameterJdbcTemplate()
                     .queryForObject(sqlConsulta, paramSource, Long.class);
-        }
-        catch (NullPointerException e) {
-            londSalida = 0L;
-        }
-        return londSalida;
+
+        if(Objects.isNull(londSalida)) londSalida = 0L;
+
+        return  londSalida;
     }
 
 }
