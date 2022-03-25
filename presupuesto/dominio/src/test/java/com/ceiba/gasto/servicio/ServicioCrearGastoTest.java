@@ -41,8 +41,9 @@ class ServicioCrearGastoTest {
         Gasto gasto = new GastoTestDataBuilder().build();
         RepositorioGasto repositorioGasto = Mockito.mock(RepositorioGasto.class);
         Mockito.when(repositorioGasto.existe(Mockito.anyLong())).thenReturn(false);
-        Mockito.when(repositorioGasto.presupuestoParaFechaGasto(Mockito.any(Gasto.class))).thenReturn(90000L);
+        Mockito.when(repositorioGasto.sumaGastosPorFechaGasto(Mockito.any(Gasto.class))).thenReturn(0L);
         Mockito.when(repositorioGasto.existePresupuesto(Mockito.any(Gasto.class))).thenReturn(true);
+        Mockito.when(repositorioGasto.presupuestoParaFechaGasto(Mockito.any(Gasto.class))).thenReturn(90000L);
         Mockito.when(repositorioGasto.crear(gasto)).thenReturn(10L);
         ServicioCrearGasto servicioCrearGasto = new ServicioCrearGasto(repositorioGasto);
         // act

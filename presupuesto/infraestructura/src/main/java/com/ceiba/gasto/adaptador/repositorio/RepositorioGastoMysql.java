@@ -4,10 +4,9 @@ import com.ceiba.gasto.puerto.repositorio.RepositorioGasto;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.gasto.modelo.entidad.Gasto;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
-
-import java.util.Objects;
 
 @Repository
 public class RepositorioGastoMysql implements RepositorioGasto {
@@ -99,14 +98,19 @@ public class RepositorioGastoMysql implements RepositorioGasto {
 
     private Long aseguraQueSeRetorneUnValor(String sqlConsulta, MapSqlParameterSource paramSource) {
 
-        Long londSalida = this.customNamedParameterJdbcTemplate
+        Long longSalida =  0L;
+
+        try{
+            longSalida = this.customNamedParameterJdbcTemplate
                     .getNamedParameterJdbcTemplate()
                     .queryForObject(sqlConsulta, paramSource, Long.class);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            //Catch
+        }
 
-        if(Objects.isNull(londSalida))
-        { londSalida = 0L; }
-
-        return  londSalida;
+        return  longSalida;
     }
 
 }
