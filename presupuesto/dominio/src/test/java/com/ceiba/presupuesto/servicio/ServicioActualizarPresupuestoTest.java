@@ -11,9 +11,7 @@ import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class ServicioActualizarPresupusetoTest {
+class ServicioActualizarPresupuestoTest {
 
     @Test
     @DisplayName("Deberia actualizar actualizar el presupuesto")
@@ -43,7 +41,7 @@ class ServicioActualizarPresupusetoTest {
         ServicioActualizarPresupuesto servicioActualizarPresupuesto = new ServicioActualizarPresupuesto(repositorioPresupuesto);
         // act - assert
         BasePrueba.assertThrows(() ->
-                servicioActualizarPresupuesto.ejecutar(presupuesto)
+                        servicioActualizarPresupuesto.ejecutar(presupuesto)
                 , ExcepcionSinDatos.class,"El presupuesto no existe en el sistema");
     }
 }

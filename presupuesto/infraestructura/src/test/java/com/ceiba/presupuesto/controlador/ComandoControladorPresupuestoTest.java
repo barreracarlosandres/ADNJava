@@ -2,7 +2,7 @@ package com.ceiba.presupuesto.controlador;
 
 import com.ceiba.ApplicationMock;
 import com.ceiba.presupuesto.comando.ComandoPresupuesto;
-import com.ceiba.presupuesto.testdatabuilder.ComandoPresupuestoTestDataBuilder;
+import com.ceiba.presupuesto.servicio.testdatabuilder.ComandoPresupuestoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,7 +43,7 @@ class ComandoControladorPresupuestoTest {
                 .conFechaPresupuesto(getFechaBaseNoExistente())
                 .build();
         // act - assert
-        mocMvc.perform(post("/presupuesto")
+        mocMvc.perform(post("/presupuestos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(presupuesto)))
                         .andExpect(status().isOk())
@@ -58,7 +58,7 @@ class ComandoControladorPresupuestoTest {
                 .conIdentificacionUsuario("000000")
                 .build();
         // act - assert
-        mocMvc.perform(post("/presupuesto")
+        mocMvc.perform(post("/presupuestos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(presupuesto)))
                         .andExpect(status().isNotFound())
@@ -76,7 +76,7 @@ class ComandoControladorPresupuestoTest {
                 .conFechaPresupuesto(getFechaBaseExistente())
                 .build();
         // act - assert
-        mocMvc.perform(post("/presupuesto")
+        mocMvc.perform(post("/presupuestos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(presupuesto)))
                         .andExpect(status().isBadRequest())
@@ -92,7 +92,7 @@ class ComandoControladorPresupuestoTest {
                 .conVarlorPresupuesto(500L)
                 .build();
         // act - assert
-        mocMvc.perform(put("/presupuesto/{id}",id)
+        mocMvc.perform(put("/presupuestos/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(presupuesto)))
                         .andExpect(status().isOk());
@@ -105,7 +105,7 @@ class ComandoControladorPresupuestoTest {
         Long id = 10L;
         ComandoPresupuesto presupuesto = new ComandoPresupuestoTestDataBuilder().build();
         // act - assert
-        mocMvc.perform(put("/presupuesto/{id}",id)
+        mocMvc.perform(put("/presupuestos/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(presupuesto)))
                 .andExpect(status().isNotFound())
@@ -118,12 +118,12 @@ class ComandoControladorPresupuestoTest {
         // arrange
         Long id = 1L;
         // act - assert
-        mocMvc.perform(delete("/presupuesto/{id}",id)
+        mocMvc.perform(delete("/presupuestos/{id}",id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                         .andExpect(status().isOk());
 
-        mocMvc.perform(get("/presupuesto")
+        mocMvc.perform(get("/presupuestos")
                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isOk())
                         .andExpect(jsonPath("$", hasSize(0)));

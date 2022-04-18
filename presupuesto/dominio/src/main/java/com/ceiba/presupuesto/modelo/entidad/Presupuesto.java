@@ -43,7 +43,7 @@ public class Presupuesto {
         this.fechaPresupuesto = fechaPresupuesto;
     }
 
-    private void validarRestriccionesDeParametrosEntrada(String identificacionUsuario, Long valorPresupuesto, LocalDateTime fechaPresupuesto) {
+    public void validarRestriccionesDeParametrosEntrada(String identificacionUsuario, Long valorPresupuesto, LocalDateTime fechaPresupuesto) {
 
         validarObligatorio(fechaPresupuesto, SE_DEBE_INGRESAR_FECHA_PRESUPUESTO);
         validarObligatorio(valorPresupuesto, SE_DEBE_INGRESAR_VALOR_PRESUPUESTO);
@@ -54,5 +54,5 @@ public class Presupuesto {
         validarLongitudMaxima(identificacionUsuario, LONGITUD_MAXIMA_IDENTIFICACION_USUARIO, LA_IDENTIFICACION_USUARIO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
         validarLongitudMaxima(valorPresupuesto, LONGITUD_MAXIMA_VALOR_PRESUPUESTO, EL_VALOR_PRESUPUESTO_DEBE_TENER_UNA_LONGITUD_MAYOR_O_IGUAL_A);
     }
-
+    
 }

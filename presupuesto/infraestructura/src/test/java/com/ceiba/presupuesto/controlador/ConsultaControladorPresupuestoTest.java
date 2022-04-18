@@ -37,7 +37,7 @@ class ConsultaControladorPresupuestoTest {
     void deberiaListarPresupuestos() throws Exception {
         // arrange
         // act - assert
-        mocMvc.perform(get("/presupuesto")
+        mocMvc.perform(get("/presupuestos")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))

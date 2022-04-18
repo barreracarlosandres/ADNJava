@@ -1,4 +1,4 @@
-package com.ceiba.presupuesto.testdatabuilder;
+package com.ceiba.presupuesto.servicio.testdatabuilder;
 
 import com.ceiba.presupuesto.comando.ComandoPresupuesto;
 import org.apache.commons.lang3.RandomStringUtils;

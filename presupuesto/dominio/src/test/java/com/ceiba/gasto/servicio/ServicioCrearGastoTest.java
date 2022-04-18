@@ -143,7 +143,8 @@ class ServicioCrearGastoTest {
     }
 
     private long getValorGastoMayoTamanoDelPermido() {
-        return Long.parseLong(RandomStringUtils.randomNumeric(8));
+        return 11111111L;
+        //qreturn Long.parseLong(RandomStringUtils.randomNumeric(8,8));
     }
 
     @Test

@@ -17,6 +17,11 @@ public class ServicioCrearPresupuesto {
     }
 
     public Long ejecutar(Presupuesto presupuesto) {
+        presupuesto.validarRestriccionesDeParametrosEntrada(
+                presupuesto.getIdentificacionUsuario(),
+                presupuesto.getValorPresupuesto(),
+                presupuesto.getFechaPresupuesto()
+        );
         validarExistenciaPreviaUsuario(presupuesto);
         validarExistenciaPreviaPresupuesto(presupuesto);
         return this.repositorioPresupuesto.crear(presupuesto);

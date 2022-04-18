@@ -1,7 +1,6 @@
 package com.ceiba.gasto.servicio.testdatabuilder;
 
 import com.ceiba.gasto.comando.ComandoGasto;
-import com.ceiba.presupuesto.testdatabuilder.ComandoPresupuestoTestDataBuilder;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.time.LocalDateTime;

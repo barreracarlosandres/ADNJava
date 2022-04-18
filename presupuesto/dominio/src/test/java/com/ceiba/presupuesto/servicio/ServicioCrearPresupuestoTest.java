@@ -8,8 +8,6 @@ import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.presupuesto.modelo.entidad.Presupuesto;
 import com.ceiba.presupuesto.puerto.repositorio.RepositorioPresupuesto;
 import com.ceiba.presupuesto.servicio.testdatabuilder.PresupuestoTestDataBuilder;
-import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
-import com.ceiba.usuario.servicio.ServicioCrearUsuario;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

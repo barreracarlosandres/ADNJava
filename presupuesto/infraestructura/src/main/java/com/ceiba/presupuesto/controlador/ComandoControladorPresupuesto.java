@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/presupuesto")
+@RequestMapping("/presupuestos")
 @Api(tags = { "Controlador comando presupuesto"})
 public class ComandoControladorPresupuesto {
 
